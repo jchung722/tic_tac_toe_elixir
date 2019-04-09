@@ -5,24 +5,14 @@
 
 ## Setup/Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `tic_tac_toe_elixir` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:tic_tac_toe_elixir, "~> 0.1.0"}
-  ]
-end
-```
-
 ## Running Tests
-$ mix test
+To run tests, from the root directory use the command:
+    $ mix test
+
+To run the test watcher:
+    $ mix test.watch
 
 ## Running the Program
 
-
 ## Dependencies
-
-
-## Versions
+Elixir 1.8.1 (compiled with Erlang/OTP 21)
