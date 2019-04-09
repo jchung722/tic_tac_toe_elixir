@@ -1,4 +1,5 @@
-# TicTacToeElixir
+[![Build Status](https://travis-ci.org/jchung722/tic_tac_toe_elixir.svg?branch=master)](https://travis-ci.org/jchung722/tic_tac_toe_elixir)
+# TicTacToeElixir 
 
 **A Game of Tic-Tac-Toe using Elixir**
 
