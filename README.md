@@ -6,11 +6,11 @@
 ## Setup/Installation
 
 ## Running Tests
-To run tests, from the root directory use the command:
-    $ mix test
+To run tests, from the root directory use the command:  
+```$ mix test```
 
-To run the test watcher:
-    $ mix test.watch
+To run the test watcher:  
+```$ mix test.watch```
 
 ## Running the Program
 
