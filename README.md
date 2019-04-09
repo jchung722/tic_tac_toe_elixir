@@ -1,8 +1,8 @@
 # TicTacToeElixir
 
-**TODO: Add description**
+**A Game of Tic-Tac-Toe using Elixir**
 
-## Installation
+## Setup/Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `tic_tac_toe_elixir` to your list of dependencies in `mix.exs`:
@@ -15,7 +15,13 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/tic_tac_toe_elixir](https://hexdocs.pm/tic_tac_toe_elixir).
+## Running Tests
+$ mix test
 
+## Running the Program
+
+
+## Dependencies
+
+
+## Versions
