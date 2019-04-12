@@ -1,5 +1,5 @@
 defmodule TicTacToeElixir do
   def main(_args) do
-    IO.puts "Hello World"
+    IO.gets("Enter your move:")
   end
 end
