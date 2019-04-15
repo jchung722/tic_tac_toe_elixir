@@ -1,5 +1,6 @@
 defmodule Game do
 
+  #checks if game has a tie
   def has_tie?([]), do: true
 
   def has_tie?([ "X" | tail]), do: has_tie?(tail)
@@ -8,6 +9,7 @@ defmodule Game do
 
   def has_tie?([ _head | _tail]), do: false
 
+  #checks if a player won the game
   def has_winner?(board) do
     cond do
       check_row(board) ->
@@ -27,6 +29,7 @@ defmodule Game do
     end
   end
 
+  #helper function for has_winner? - checks if rows have win condition
   def check_row([]), do: false
 
   def check_row([a, a, a | _tail]), do: true
