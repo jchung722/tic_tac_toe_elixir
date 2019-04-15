@@ -1,4 +1,4 @@
-defmodule Board do
+defmodule BoardTest do
   use ExUnit.Case
   doctest Board
 
@@ -11,5 +11,21 @@ defmodule Board do
       board_data = %Board{}
       assert board_data.data == context[:board]
     end
+
+    test "empty board will be printed" do
+      board_data = %Board{}
+      assert Board.print_board(board_data.data) == "| 1 | 2 | 3 |\n| 4 | 5 | 6 |\n| 7 | 8 | 9 |"
+    end
+  end
+
+  describe "in a played game" do
+    setup do
+      [board: ["1", "X", "3", "4", "O", "6", "7", "8", "9"]]
+    end
+
+    test "currently played board will be printed" do
+
+    end
+
   end
 end
