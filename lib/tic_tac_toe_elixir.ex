@@ -1,6 +1,7 @@
 defmodule TicTacToeElixir do
   def main(_args) do
-    move =IO.gets("Enter your move:")
-    IO.puts("Your move was #{move}")
+    board = %Board{}
+    IO.puts(Board.print_board(board.data))
+    _move =IO.gets("Enter your move:")
   end
 end

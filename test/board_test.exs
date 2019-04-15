@@ -19,12 +19,10 @@ defmodule BoardTest do
   end
 
   describe "in a played game" do
-    setup do
-      [board: ["1", "X", "3", "4", "O", "6", "7", "8", "9"]]
-    end
 
     test "currently played board will be printed" do
-
+      board = ["1", "X", "3", "4", "O", "6", "7", "8", "9"]
+      assert Board.print_board(board) == "| 1 | X | 3 |\n| 4 | O | 6 |\n| 7 | 8 | 9 |"
     end
 
   end
