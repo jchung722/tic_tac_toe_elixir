@@ -1,7 +1,14 @@
 defmodule Board do
   defstruct data: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-  def print_board(board_data) do
+  def print(board_data) do
     "| #{Enum.at(board_data, 0)} | #{Enum.at(board_data, 1)} | #{Enum.at(board_data, 2)} |\n| #{Enum.at(board_data, 3)} | #{Enum.at(board_data, 4)} | #{Enum.at(board_data, 5)} |\n| #{Enum.at(board_data, 6)} | #{Enum.at(board_data, 7)} | #{Enum.at(board_data, 8)} |"
+  end
+
+  def update(move, board_data) do
+    player = "X"
+    move_index = String.to_integer(move) - 1
+    board_data = List.replace_at(board_data, move_index, player)
+    board_data
   end
 end
