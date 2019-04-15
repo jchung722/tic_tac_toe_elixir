@@ -36,4 +36,9 @@ defmodule Game do
 
   def check_row([_, _, _ | tail]), do: check_row(tail)
 
+  #check if game is over
+  def is_over?(board) do
+    has_winner?(board) || has_tie?(board)
+  end
+
 end
