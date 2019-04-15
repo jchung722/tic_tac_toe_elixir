@@ -7,7 +7,7 @@ defmodule PlayerTest do
     assert Player.switch(current_player) == "O"
   end
 
-  test "a current player O wills switch to player X" do
+  test "a current player O will switch to player X" do
     current_player = "O"
     assert Player.switch(current_player) == "X"
   end

@@ -20,7 +20,6 @@ defmodule GameTest do
     end
   end
 
-
   test "a game with no three adjacent moves from a player has no winner" do
     board = ["X", "2", "X", "O", "5", "6", "O", "8", "9"]
     assert Game.has_winner?(board) == false
