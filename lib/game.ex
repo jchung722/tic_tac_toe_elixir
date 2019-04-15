@@ -1,5 +1,20 @@
 defmodule Game do
 
+  def play(true, board) do
+    IO.puts(Board.print(board))
+    IO.puts("GAME OVER")
+  end
+
+  def play(false, board, player) do
+    IO.puts(Board.print(board))
+    new_board = IO.gets("Enter your move, player #{player}:") |>
+    String.trim |>
+    Board.update(board, player)
+
+    next_player = Player.switch(player)
+    play(Game.is_over?(board), new_board, next_player)
+  end
+
   #checks if game has a tie
   def has_tie?([]), do: true
 

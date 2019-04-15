@@ -28,7 +28,7 @@ defmodule BoardTest do
     end
 
     test "when a player makes a move, the board will be updated with that move", context do
-      assert Board.update("3", context[:board]) == ["1", "X", "X", "4", "O", "6", "7", "8", "9"]
+      assert Board.update("3", context[:board], "X") == ["1", "X", "X", "4", "O", "6", "7", "8", "9"]
     end
 
   end

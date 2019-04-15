@@ -5,8 +5,7 @@ defmodule Board do
     "| #{Enum.at(board_data, 0)} | #{Enum.at(board_data, 1)} | #{Enum.at(board_data, 2)} |\n| #{Enum.at(board_data, 3)} | #{Enum.at(board_data, 4)} | #{Enum.at(board_data, 5)} |\n| #{Enum.at(board_data, 6)} | #{Enum.at(board_data, 7)} | #{Enum.at(board_data, 8)} |"
   end
 
-  def update(move, board_data) do
-    player = "X"
+  def update(move, board_data, player) do
     move_index = String.to_integer(move) - 1
     board_data = List.replace_at(board_data, move_index, player)
     board_data
