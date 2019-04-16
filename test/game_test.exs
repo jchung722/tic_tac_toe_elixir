@@ -17,7 +17,7 @@ defmodule GameTest do
                  context[:full_board],
                  context[:player]
                )
-             end) == "| X | O | 3 |\n| X | O | 6 |\n| X | 8 | 9 |\nGAME OVER\n"
+             end) == " X | O | 3 \n--- --- ---\n X | O | 6 \n--- --- ---\n X | 8 | 9 \nGAME OVER\n"
     end
   end
 
@@ -33,7 +33,7 @@ defmodule GameTest do
                  context[:full_board],
                  context[:player]
                )
-             end) == "| X | O | 3 |\n| X | O | 6 |\n| X | 8 | 9 |\nGAME OVER\n"
+             end) == " X | O | 3 \n--- --- ---\n X | O | 6 \n--- --- ---\n X | 8 | 9 \nGAME OVER\n"
     end
   end
 end

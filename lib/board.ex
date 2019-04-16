@@ -1,12 +1,15 @@
 defmodule Board do
   defstruct data: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-  def build(board_data) do
-    "| #{Enum.at(board_data, 0)} | #{Enum.at(board_data, 1)} | #{Enum.at(board_data, 2)} |\n| #{
-      Enum.at(board_data, 3)
-    } | #{Enum.at(board_data, 4)} | #{Enum.at(board_data, 5)} |\n| #{Enum.at(board_data, 6)} | #{
-      Enum.at(board_data, 7)
-    } | #{Enum.at(board_data, 8)} |"
+  def build([]), do: ""
+
+  def build([ a, b, c | tail]) do
+    cond do
+      tail == [] ->
+        " #{a} | #{b} | #{c} "
+      true ->
+        " #{a} | #{b} | #{c} \n--- --- ---\n"  <> build(tail)
+    end
   end
 
   def update(move, board_data, player) do

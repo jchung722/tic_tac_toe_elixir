@@ -14,7 +14,7 @@ defmodule BoardTest do
 
     test "empty board will be built" do
       board_data = %Board{}
-      assert Board.build(board_data.data) == "| 1 | 2 | 3 |\n| 4 | 5 | 6 |\n| 7 | 8 | 9 |"
+      assert Board.build(board_data.data) == " 1 | 2 | 3 \n--- --- ---\n 4 | 5 | 6 \n--- --- ---\n 7 | 8 | 9 "
     end
   end
 
@@ -24,7 +24,7 @@ defmodule BoardTest do
     end
 
     test "currently played board will be built", context do
-      assert Board.build(context[:board]) == "| 1 | X | 3 |\n| 4 | O | 6 |\n| 7 | 8 | 9 |"
+      assert Board.build(context[:board]) == " 1 | X | 3 \n--- --- ---\n 4 | O | 6 \n--- --- ---\n 7 | 8 | 9 "
     end
 
     test "when a player makes a move, the board will be updated with that move", context do
