@@ -1,15 +1,15 @@
 defmodule Status do
   # checks if game has a tie
-  def has_tie?([]), do: true
+  def tie?([]), do: true
 
-  def has_tie?(["X" | tail]), do: has_tie?(tail)
+  def tie?(["X" | tail]), do: tie?(tail)
 
-  def has_tie?(["O" | tail]), do: has_tie?(tail)
+  def tie?(["O" | tail]), do: tie?(tail)
 
-  def has_tie?([_head | _tail]), do: false
+  def tie?([_head | _tail]), do: false
 
   # checks if a player won the game
-  def has_winner?(board) do
+  def win?(board) do
     cond do
       check_row(board) ->
         true
@@ -34,7 +34,7 @@ defmodule Status do
     end
   end
 
-  # helper function for has_winner? - checks if rows have win condition
+  # helper function for win? - checks if rows have win condition
   def check_row([]), do: false
 
   def check_row([a, a, a | _tail]), do: true
@@ -42,7 +42,7 @@ defmodule Status do
   def check_row([_, _, _ | tail]), do: check_row(tail)
 
   # check if game is over
-  def is_over?(board) do
-    has_winner?(board) || has_tie?(board)
+  def over?(board) do
+    win?(board) || tie?(board)
   end
 end
