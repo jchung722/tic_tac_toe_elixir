@@ -11,6 +11,10 @@ defmodule StatusTest do
       assert Status.win?(context[:board]) == false
     end
 
+    test "the game has no adjacent moves in a row", context do
+      assert Status.check_row(context[:board]) == false
+    end
+
     test "the game has no tie", context do
       assert Status.tie?(context[:board]) == false
     end
@@ -24,6 +28,11 @@ defmodule StatusTest do
     test "a game with no three adjacent moves from a player has no winner" do
       board = ["X", "2", "X", "O", "5", "6", "O", "8", "9"]
       assert Status.win?(board) == false
+    end
+
+    test "a game with no three adjacent moves from a player has no win via rows" do
+      board = ["X", "2", "X", "O", "5", "6", "O", "8", "9"]
+      assert Status.check_row(board) == false
     end
 
     test "after one move has been made, the game is not tied" do
@@ -43,9 +52,19 @@ defmodule StatusTest do
       assert Status.win?(board) == true
     end
 
+    test "a game with three adjacent moves in a row from a player has a win via rows" do
+      board = ["X", "X", "X", "O", "O", "6", "7", "8", "9"]
+      assert Status.check_row(board) == true
+    end
+
     test "a game with three adjacent moves in a column from a player has a winner" do
       board = ["X", "O", "3", "X", "O", "6", "X", "8", "9"]
       assert Status.win?(board) == true
+    end
+
+    test "a game with three adjacent moves in a column from a player did not win via rows" do
+      board = ["X", "O", "3", "X", "O", "6", "X", "8", "9"]
+      assert Status.check_row(board) == false
     end
 
     test "a game with three adjacent moves in a diagonal from a player has a winner" do
