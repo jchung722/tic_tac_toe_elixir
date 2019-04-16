@@ -1,5 +1,4 @@
 defmodule Status do
-  # checks if game has a tie
   def tie?([]), do: true
 
   def tie?(["X" | tail]), do: tie?(tail)
@@ -8,7 +7,6 @@ defmodule Status do
 
   def tie?([_head | _tail]), do: false
 
-  # checks if a player won the game
   def win?(board) do
     cond do
       check_row(board) ->
