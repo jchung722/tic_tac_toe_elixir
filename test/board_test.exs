@@ -8,13 +8,13 @@ defmodule BoardTest do
     end
 
     test "board should be empty", context do
-      board_data = %Board{}
-      assert board_data.data == context[:board]
+      board = %Board{}
+      assert board.spots == context[:board]
     end
 
     test "empty board will be built" do
-      board_data = %Board{}
-      assert Board.build(board_data.data) == " 1 | 2 | 3 \n--- --- ---\n 4 | 5 | 6 \n--- --- ---\n 7 | 8 | 9 "
+      board = %Board{}
+      assert Board.build(board.spots) == " 1 | 2 | 3 \n--- --- ---\n 4 | 5 | 6 \n--- --- ---\n 7 | 8 | 9 "
     end
   end
 

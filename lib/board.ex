@@ -1,5 +1,5 @@
 defmodule Board do
-  defstruct data: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  defstruct spots: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
   def build([]), do: ""
 
@@ -12,8 +12,8 @@ defmodule Board do
     end
   end
 
-  def update(move, board_data, player) do
+  def update(move, board, player) do
     move_index = String.to_integer(move) - 1
-    List.replace_at(board_data, move_index, player)
+    List.replace_at(board, move_index, player)
   end
 end
