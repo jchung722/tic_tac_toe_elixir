@@ -4,7 +4,7 @@
 **A Game of Tic-Tac-Toe using Elixir**
 
 ## Setup/Installation
-To build the escript for the project, use the command:
+To build the escript for the project, use the command:  
 ```$ mix escript.build```
 
 ## Running Tests
@@ -15,7 +15,7 @@ To run the test watcher:
 ```$ mix test.watch```
 
 ## Running the Program
-To start running the program:
+To start running the program:  
 ```$ ./tic_tac_toe_elixir```
 
 ## Dependencies
