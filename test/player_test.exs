@@ -1,6 +1,5 @@
 defmodule PlayerTest do
   use ExUnit.Case
-  doctest Player
 
   test "a current player X will switch to player O" do
     current_player = "X"
