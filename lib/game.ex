@@ -6,14 +6,18 @@ defmodule Game do
 
   def play(false, board, player) do
     IO.puts(Board.build(board))
+    move = IO.gets("Enter your move, player #{player}:") |> Input.process
 
-    new_board =
-      IO.gets("Enter your move, player #{player}:")
-      |> String.trim()
-      |> Board.update(board, player)
+    case move do
+      {:ok, processed_move} ->
+        new_board = Board.update(processed_move, board, player)
+        next_player = Player.switch(player)
+        play(Status.over?(new_board), new_board, next_player)
 
-    next_player = Player.switch(player)
-    play(Status.over?(new_board), new_board, next_player)
+      {:error, error_message} ->
+        IO.puts("#{error_message} Enter a valid move.")
+        play(Status.over?(board), board, player)
+    end
 
   end
 end

@@ -23,7 +23,7 @@ defmodule BoardTest do
 
     test "when a player makes a move, the board will be updated with that move" do
       board = ["1", "X", "3", "4", "O", "6", "7", "8", "9"]
-      assert Board.update("3", board, "X") == [ "1", "X", "X", "4", "O", "6", "7", "8", "9"]
+      assert Board.update(3, board, "X") == [ "1", "X", "X", "4", "O", "6", "7", "8", "9"]
     end
   end
 end

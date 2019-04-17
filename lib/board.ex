@@ -13,7 +13,7 @@ defmodule Board do
   end
 
   def update(move, board, player) do
-    move_index = String.to_integer(move) - 1
+    move_index = move - 1
     List.replace_at(board, move_index, player)
   end
 end
