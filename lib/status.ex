@@ -32,14 +32,12 @@ defmodule Status do
     end
   end
 
-  # helper function for win? - checks if rows have win condition
-  def check_row([]), do: false
+  defp check_row([]), do: false
 
-  def check_row([a, a, a | _tail]), do: true
+  defp check_row([a, a, a | _tail]), do: true
 
-  def check_row([_, _, _ | tail]), do: check_row(tail)
+  defp check_row([_, _, _ | tail]), do: check_row(tail)
 
-  # check if game is over
   def over?(board) do
     win?(board) || tie?(board)
   end

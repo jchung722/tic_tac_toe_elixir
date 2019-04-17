@@ -14,5 +14,6 @@ defmodule Game do
 
     next_player = Player.switch(player)
     play(Status.over?(new_board), new_board, next_player)
+
   end
 end
