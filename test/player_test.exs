@@ -11,4 +11,9 @@ defmodule PlayerTest do
     assert Player.switch(current_player) == "X"
   end
 
+  test "if the player is not X or O, switching players will create an error" do
+    current_player = "A"
+    assert Player.switch(current_player) == {:error, "players can only be X or O"}
+  end
+
 end
