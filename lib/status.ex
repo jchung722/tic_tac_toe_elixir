@@ -13,21 +13,21 @@ defmodule Status do
 
   defp check_rows([]), do: false
 
-  defp check_rows([a, a, a | _tail]), do: true
+  defp check_rows([mark, mark, mark | _tail]), do: true
 
   defp check_rows([_, _, _ | tail]), do: check_rows(tail)
 
 
   defp check_columns([]), do: false
 
-  defp check_columns([a, _, _, a, _, _, a | _tail]), do: true
+  defp check_columns([mark, _, _, mark, _, _, mark | _tail]), do: true
 
   defp check_columns([_head | tail]), do: check_columns(tail)
 
 
-  defp check_diagonals([a, _, _, _, a, _, _, _, a]), do: true
+  defp check_diagonals([mark, _, _, _, mark, _, _, _, mark]), do: true
 
-  defp check_diagonals([_, _, a, _, a, _, a, _, _]), do: true
+  defp check_diagonals([_, _, mark, _, mark, _, mark, _, _]), do: true
 
   defp check_diagonals(_board), do: false
 
