@@ -8,17 +8,17 @@ defmodule BoardTest do
       assert board.spots == ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     end
 
-    test "empty board will be built" do
+    test "empty board will be formatted to string" do
       board = %Board{}
-      assert Board.build(board.spots) == " 1 | 2 | 3 \n--- --- ---\n 4 | 5 | 6 \n--- --- ---\n 7 | 8 | 9 "
+      assert Board.format(board.spots) == " 1 | 2 | 3 \n---+---+---\n 4 | 5 | 6 \n---+---+---\n 7 | 8 | 9 "
     end
   end
 
   describe "during a game" do
 
-    test "currently played board will be built" do
+    test "currently played board will be formatted to string" do
       board = ["1", "X", "3", "4", "O", "6", "7", "8", "9"]
-      assert Board.build(board) == " 1 | X | 3 \n--- --- ---\n 4 | O | 6 \n--- --- ---\n 7 | 8 | 9 "
+      assert Board.format(board) == " 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 "
     end
 
     test "when a player makes a move, the board will be updated with that move" do

@@ -1,11 +1,11 @@
 defmodule Game do
   def play(true, board, _next_player) do
-    IO.puts(Board.build(board))
+    IO.puts(Board.format(board))
     IO.puts("GAME OVER")
   end
 
   def play(false, board, player) do
-    IO.puts(Board.build(board))
+    IO.puts(Board.format(board))
     move = IO.gets("Enter your move, player #{player}:") |> Input.process
 
     case move do

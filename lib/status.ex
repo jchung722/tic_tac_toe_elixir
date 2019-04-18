@@ -7,36 +7,30 @@ defmodule Status do
 
   def tie?([_head | _tail]), do: false
 
-  def win?(board) do
-    cond do
-      check_row(board) ->
-        true
 
-      Enum.at(board, 0) == Enum.at(board, 3) && Enum.at(board, 3) == Enum.at(board, 6) ->
-        true
+  def win?(board), do: check_rows(board) ||  check_columns(board) || check_diagonals(board)
 
-      Enum.at(board, 1) == Enum.at(board, 4) && Enum.at(board, 4) == Enum.at(board, 7) ->
-        true
 
-      Enum.at(board, 2) == Enum.at(board, 5) && Enum.at(board, 5) == Enum.at(board, 8) ->
-        true
+  defp check_rows([]), do: false
 
-      Enum.at(board, 0) == Enum.at(board, 4) && Enum.at(board, 4) == Enum.at(board, 8) ->
-        true
+  defp check_rows([a, a, a | _tail]), do: true
 
-      Enum.at(board, 2) == Enum.at(board, 4) && Enum.at(board, 4) == Enum.at(board, 6) ->
-        true
+  defp check_rows([_, _, _ | tail]), do: check_rows(tail)
 
-      true ->
-        false
-    end
-  end
 
-  defp check_row([]), do: false
+  defp check_columns([]), do: false
 
-  defp check_row([a, a, a | _tail]), do: true
+  defp check_columns([a, _, _, a, _, _, a | _tail]), do: true
 
-  defp check_row([_, _, _ | tail]), do: check_row(tail)
+  defp check_columns([_head | tail]), do: check_columns(tail)
+
+
+  defp check_diagonals([a, _, _, _, a, _, _, _, a]), do: true
+
+  defp check_diagonals([_, _, a, _, a, _, a, _, _]), do: true
+
+  defp check_diagonals(_board), do: false
+
 
   def over?(board) do
     win?(board) || tie?(board)
