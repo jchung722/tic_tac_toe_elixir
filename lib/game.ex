@@ -2,19 +2,19 @@ defmodule Game do
 
   def play({:win, winner, board}) do
     clear_display()
-    Board.display(board)
+    Board.display(Board.format(board))
     IO.puts("GAME OVER! Player #{winner} WINS!")
   end
 
   def play({:tie, message, board}) do
     clear_display()
-    Board.display(board)
+    Board.display(Board.format(board))
     IO.puts("GAME OVER! #{message}")
   end
 
   def play({:play, current_player, board}) do
     clear_display()
-    Board.display(board)
+    Board.display(Board.format(board))
     move = IO.gets("Enter your move, Player #{current_player}:") |> Input.process
 
     case move do

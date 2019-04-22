@@ -1,6 +1,5 @@
 defmodule BoardTest do
   use ExUnit.Case
-  import ExUnit.CaptureIO
 
   describe "in a new game" do
 
@@ -27,13 +26,5 @@ defmodule BoardTest do
       assert Board.update(3, board, "X") == [ "1", "X", "X", "4", "O", "6", "7", "8", "9"]
     end
 
-    test "only the most current board will be displayed" do
-      board = ["1", "X", "3", "4", "O", "6", "7", "8", "9"]
-      assert capture_io(fn ->
-        Board.display(
-          board
-        )
-      end) == " 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 \n"
-    end
   end
 end
