@@ -37,8 +37,8 @@ defmodule StatusTest do
 
     test "if there are any unplayed moves and no winner, game is still in play" do
       board = ["X", "O", "X", "O", "X", "6", "O", "X", "O"]
-      current_player = "O"
-      assert Status.result(board, current_player) == {:play, ["X", "O", "X", "O", "X", "6", "O", "X", "O"]}
+      next_player = "O"
+      assert Status.result(board, next_player) == {:play, "O", ["X", "O", "X", "O", "X", "6", "O", "X", "O"]}
     end
   end
 
@@ -75,14 +75,14 @@ defmodule StatusTest do
 
     test "there is a winner" do
       board = ["X", "X", "X", "O", "O", "6", "7", "8", "9"]
-      current_player = "X"
-      assert Status.result(board, current_player) == {:win, "X", ["X", "X", "X", "O", "O", "6", "7", "8", "9"]}
+      next_player = "O"
+      assert Status.result(board, next_player) == {:win, "X", ["X", "X", "X", "O", "O", "6", "7", "8", "9"]}
     end
 
     test "there is a tie" do
       board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
       current_player = "X"
-      assert Status.result(board, current_player) == {:tie, ["X", "O", "X", "O", "X", "X", "O", "X", "O"]}
+      assert Status.result(board, current_player) == {:tie, "IT'S A TIE!", ["X", "O", "X", "O", "X", "X", "O", "X", "O"]}
     end
   end
 end
