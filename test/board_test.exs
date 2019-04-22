@@ -33,7 +33,7 @@ defmodule BoardTest do
         Board.display(
           board
         )
-      end) == "\e[2J\n 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 \n"
+      end) == " 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 \n"
     end
   end
 end

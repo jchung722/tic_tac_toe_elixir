@@ -18,7 +18,6 @@ defmodule Board do
   end
 
   def display(board) do
-    IO.puts(IO.ANSI.clear())
     IO.puts(Board.format(board))
   end
 end
