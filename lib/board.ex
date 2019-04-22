@@ -16,4 +16,9 @@ defmodule Board do
     move_index = move - 1
     List.replace_at(board, move_index, player)
   end
+
+  def display(board) do
+    IO.puts(IO.ANSI.clear())
+    IO.puts(Board.format(board))
+  end
 end
