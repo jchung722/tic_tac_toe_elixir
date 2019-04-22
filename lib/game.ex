@@ -1,7 +1,13 @@
 defmodule Game do
-  def play(true, board, _next_player) do
+  def play(true, board, player) do
     IO.puts(Board.format(board))
-    IO.puts("GAME OVER")
+    cond do
+      Status.win?(board) ->
+        last_player = Player.switch(player)
+        IO.puts("GAME OVER! Player #{last_player} WINS!")
+      Status.tie?(board) ->
+        IO.puts("GAME OVER! IT'S A TIE!")
+    end
   end
 
   def play(false, board, player) do
