@@ -4,7 +4,7 @@ defmodule TicTacToeElixir do
     board = %Board{}.spots
     player = "X"
 
-    Game.play(false, board, player)
+    Game.play(Status.result(board, player))
 
   end
 end

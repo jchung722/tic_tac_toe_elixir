@@ -3,7 +3,7 @@ defmodule BoardTest do
 
   describe "in a new game" do
 
-    test "board should be empty", context do
+    test "board should be empty" do
       board = %Board{}
       assert board.spots == ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     end
@@ -25,5 +25,6 @@ defmodule BoardTest do
       board = ["1", "X", "3", "4", "O", "6", "7", "8", "9"]
       assert Board.update(3, board, "X") == [ "1", "X", "X", "4", "O", "6", "7", "8", "9"]
     end
+
   end
 end

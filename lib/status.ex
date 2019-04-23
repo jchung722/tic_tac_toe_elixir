@@ -35,4 +35,16 @@ defmodule Status do
   def over?(board) do
     win?(board) || tie?(board)
   end
+
+  def result(board, next_player) do
+    cond do
+      win?(board) ->
+        winner = Player.switch(next_player)
+        {:win, winner, board}
+      tie?(board) ->
+        {:tie, "IT'S A TIE!", board}
+      true ->
+        {:play, next_player, board}
+    end
+  end
 end
