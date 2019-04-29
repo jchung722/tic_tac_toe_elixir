@@ -32,19 +32,19 @@ defmodule Status do
   defp check_diagonals(_board), do: false
 
 
-  def over?(board) do
-    win?(board) || tie?(board)
-  end
+  # def over?(board) do
+  #   win?(board) || tie?(board)
+  # end
 
-  def result(board, next_player) do
+  def result(board, next_player, current_player) do
     cond do
       win?(board) ->
-        winner = Player.switch(next_player)
+        winner = current_player
         {:win, winner, board}
       tie?(board) ->
         {:tie, "IT'S A TIE!", board}
       true ->
-        {:play, next_player, board}
+        {:play, next_player, current_player, board}
     end
   end
 end
