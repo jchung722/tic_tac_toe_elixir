@@ -21,6 +21,15 @@ defmodule Input do
     end
   end
 
+  def validate(symbol) do
+    cond do
+      Regex.match?(~r/^[a-zA-Z0-9]$/, symbol) ->
+        :valid
+      true ->
+        :invalid
+    end
+  end
+
   defp spot_check(move, board) do
     move_board_index = Input.to_board_index(move)
     spot = Enum.at(board, move_board_index)

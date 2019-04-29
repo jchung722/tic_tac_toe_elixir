@@ -2,9 +2,9 @@ defmodule InputTest do
   use ExUnit.Case
   doctest Input
 
-  describe "input is valid" do
+  describe "move is valid" do
 
-    test "when it is a numeric represenation of an untaken spot on the board" do
+    test "when it is a numeric represenfation of an untaken spot on the board" do
       board = ["1", "X", "3",
                "4", "O", "6",
                "7", "8", "9"]
@@ -17,7 +17,7 @@ defmodule InputTest do
     assert Input.to_board_index("1\n") == 0
   end
 
-  describe "input is invalid" do
+  describe "move is invalid" do
     test "when it is empty" do
       board = ["1", "X", "3",
                "4", "O", "6",
@@ -46,6 +46,31 @@ defmodule InputTest do
       assert Input.validate("10", board) == :invalid
     end
 
+  end
+
+  describe "player symbol is valid" do
+    test "when it is a single alphanumeric characters" do
+      player_symbol = "X"
+      assert Input.validate(player_symbol) == :valid
+    end
+  end
+
+  describe "player symbol is invalid" do
+
+    test "when it is empty" do
+      player_symbol = ""
+      assert Input.validate(player_symbol) == :invalid
+    end
+
+    test "when longer than one character" do
+      player_symbol = "OOO"
+      assert Input.validate(player_symbol) == :invalid
+    end
+
+    test "when not alphanumeric" do
+      player_symbol = "&"
+      assert Input.validate(player_symbol) == :invalid
+    end
   end
 
 end
