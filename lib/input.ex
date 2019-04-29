@@ -33,7 +33,7 @@ defmodule Input do
     input_board_index = Input.to_board_index(input)
     max_boundary = Enum.count(board)
     cond do
-    input_board_index < max_boundary && input_board_index >= 0 ->
+      input_board_index < max_boundary && input_board_index >= 0 ->
         :valid
       true ->
         :invalid
