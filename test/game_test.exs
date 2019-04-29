@@ -6,7 +6,9 @@ defmodule GameTest do
   describe "when game is complete" do
 
     test "ends game and displays winner" do
-      win_board = ["X", "O", "3", "X", "O", "6", "X", "8", "9"]
+      win_board = ["X", "O", "3",
+                   "X", "O", "6",
+                   "X", "8", "9"]
       next_player = "O"
       assert capture_io(fn ->
                Game.play(
@@ -16,7 +18,9 @@ defmodule GameTest do
     end
 
     test "ends game and displays tie" do
-      full_board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      full_board = ["X", "O", "X",
+                    "O", "X", "X",
+                    "O", "X", "O"]
       next_player = "O"
       assert capture_io(fn ->
                Game.play(

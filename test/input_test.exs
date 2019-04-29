@@ -2,19 +2,50 @@ defmodule InputTest do
   use ExUnit.Case
   doctest Input
 
-  describe "when input is valid" do
-    test "user input is returned as integer" do
-      assert Input.process("1\n") == {:ok, 1}
-    end
-  end
+  describe "input is valid" do
 
-  describe "when input is invalid" do
-    test "an empty input will trigger an error" do
-      assert Input.process("\n") == {:error, "Input is invalid!"}
+    test "when it is a numeric represenation of an untaken spot on the board" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("1", board) == :valid
     end
 
-    test "an invalid input will trigger an error" do
-      assert Input.process("invalid\n") == {:error, "Input is invalid!"}
-    end
   end
+
+  test "returns the board index from user input" do
+    assert Input.to_board_index("1\n") == 0
+  end
+
+  describe "input is invalid" do
+    test "when it is empty" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("\n", board) == :invalid
+    end
+
+    test "when it is not numeric" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("invalid\n", board) == :invalid
+    end
+
+    test "the spot on the board is already taken" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("2", board) == :invalid
+    end
+
+    test "when the input is outside the range of the board" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("10", board) == :invalid
+    end
+
+  end
+
 end

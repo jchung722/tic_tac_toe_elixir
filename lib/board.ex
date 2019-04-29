@@ -12,9 +12,8 @@ defmodule Board do
     end
   end
 
-  def update(move, board, player) do
-    move_index = move - 1
-    List.replace_at(board, move_index, player)
+  def update(move_as_index, board, player) do
+    List.replace_at(board, move_as_index, player)
   end
 
   def display(formatted_board) do
