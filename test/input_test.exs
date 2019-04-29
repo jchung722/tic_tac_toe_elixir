@@ -3,9 +3,6 @@ defmodule InputTest do
   doctest Input
 
   describe "input is valid" do
-    test "and user input is parsed and returned as index of the board" do
-      assert Input.to_board_index("1\n") == 0
-    end
 
     test "when it is a numeric represenation of an untaken spot on the board" do
       board = ["1", "X", "3",
@@ -14,6 +11,10 @@ defmodule InputTest do
       assert Input.validate("1", board) == :valid
     end
 
+  end
+
+  test "returns the board index from user input" do
+    assert Input.to_board_index("1\n") == 0
   end
 
   describe "input is invalid" do
