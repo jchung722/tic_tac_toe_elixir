@@ -16,9 +16,6 @@ defmodule StatusTest do
       assert Status.tie?(context[:board]) == false
     end
 
-    # test "the game is not over", context do
-    #   assert Status.over?(context[:board]) == false
-    # end
   end
 
   describe "during game" do
@@ -83,20 +80,6 @@ defmodule StatusTest do
                "O", "X", "O"]
       assert Status.tie?(board) == true
     end
-
-    # test "if the game has a winner, the game is over" do
-    #   board = ["X", "X", "X",
-    #            "O", "O", "6",
-    #            "7", "8", "9"]
-    #   assert Status.over?(board) == true
-    # end
-
-    # test "if the game has a tie, the game is over" do
-    #   board = ["X", "O", "X",
-    #            "O", "X", "X",
-    #            "O", "X", "O"]
-    #   assert Status.over?(board) == true
-    # end
 
     test "there is a winner" do
       board = ["X", "X", "X",

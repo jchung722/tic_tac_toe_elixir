@@ -31,11 +31,6 @@ defmodule Status do
 
   defp check_diagonals(_board), do: false
 
-
-  # def over?(board) do
-  #   win?(board) || tie?(board)
-  # end
-
   def result(board, next_player, current_player) do
     cond do
       win?(board) ->
