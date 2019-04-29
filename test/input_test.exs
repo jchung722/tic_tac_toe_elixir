@@ -39,6 +39,13 @@ defmodule InputTest do
       assert Input.validate("2", board) == :invalid
     end
 
+    test "when the input is outside the range of the board" do
+      board = ["1", "X", "3",
+               "4", "O", "6",
+               "7", "8", "9"]
+      assert Input.validate("10", board) == :invalid
+    end
+
   end
 
 end

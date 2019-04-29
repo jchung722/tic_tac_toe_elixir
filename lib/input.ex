@@ -6,7 +6,8 @@ defmodule Input do
 
   def validate(input, board) do
     with {_integer, _binary} <- Integer.parse(input),
-         :valid <- spot_check(input,board)
+         :valid <- spot_check(input, board),
+         :valid <- boundary_check(input, board)
     do
       :valid
     else
@@ -25,6 +26,17 @@ defmodule Input do
         :invalid
       _ ->
         :valid
+    end
+  end
+
+  defp boundary_check(input, board) do
+    max_boundary = Enum.count(board)
+    input_board_index = Input.to_board_index(input)
+    cond do
+      input_board_index < max_boundary && input_board_index >= 0 ->
+        :valid
+      true ->
+        :invalid
     end
   end
 
