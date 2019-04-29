@@ -1,4 +1,5 @@
 defmodule Player do
+  defstruct symbol: "", name: ""
 
   def switch("O"), do: "X"
 
