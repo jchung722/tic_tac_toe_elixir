@@ -9,9 +9,9 @@ defmodule Input do
     integer - 1
   end
 
-  def validate(move, board) do
+  def validate(move, board, player1, player2) do
     with {_integer, _binary} <- Integer.parse(move),
-         :valid <- spot_check(move, board),
+         :valid <- spot_check(move, board, player1, player2),
          :valid <- boundary_check(move, board)
     do
       :valid
@@ -30,15 +30,13 @@ defmodule Input do
     end
   end
 
-  defp spot_check(move, board) do
+  defp spot_check(move, board, player1, player2) do
     move_board_index = Input.to_board_index(move)
     spot = Enum.at(board, move_board_index)
-    case spot do
-      "X" ->
+    cond do
+      spot == player1.symbol || spot == player2.symbol ->
         :invalid
-      "O" ->
-        :invalid
-      _ ->
+      true ->
         :valid
     end
   end

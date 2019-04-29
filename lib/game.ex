@@ -17,7 +17,7 @@ defmodule Game do
     Board.display(Board.format(board))
     input = Input.gets("Enter your move, #{current_player.name}:")
 
-    case Input.validate(input, board) do
+    case Input.validate(input, board, current_player, next_player) do
       :valid ->
         new_board = Input.to_board_index(input) |> Board.update(board, current_player.symbol)
         play(Status.result(new_board, next_player, current_player))
