@@ -17,12 +17,13 @@ defmodule Input do
 
   defp spot_check(input, board) do
     input_board_index = Input.to_board_index(input)
-    cond do
-      Enum.at(board, input_board_index) == "X" ->
+    spot = Enum.at(board, input_board_index)
+    case spot do
+      "X" ->
         :invalid
-      Enum.at(board, input_board_index) == "O" ->
+      "O" ->
         :invalid
-      true ->
+      _ ->
         :valid
     end
   end
