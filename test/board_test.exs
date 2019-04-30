@@ -19,17 +19,21 @@ defmodule BoardTest do
   describe "during a game" do
 
     test "currently played board will be formatted to string" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
       assert Board.format(board) == " 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 "
     end
 
     test "when a player makes a move, the board will be updated with that move" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      assert Board.update(2, board, "X") == [ "1", "X", "X", "4", "O", "6", "7", "8", "9"]
+      assert Board.update(2, board, playerX) == [ "1", playerX, playerX, "4", playerO, "6", "7", "8", "9"]
     end
 
   end

@@ -5,12 +5,12 @@ defmodule InputTest do
   describe "move is valid" do
 
     test "when it is a numeric represenfation of an untaken spot on the board" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Input.validate("1", board, player1, player2) == :valid
+      assert Input.validate("1", board, playerX, playerO) == :valid
     end
 
   end
@@ -21,39 +21,39 @@ defmodule InputTest do
 
   describe "move is invalid" do
     test "when it is empty" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Input.validate("\n", board, player1, player2) == :invalid
+      assert Input.validate("\n", board, playerX, playerO) == :invalid
     end
 
     test "when it is not numeric" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Input.validate("invalid\n", board, player1, player2) == :invalid
+      assert Input.validate("invalid\n", board, playerX, playerO) == :invalid
     end
 
     test "the spot on the board is already taken" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Input.validate("2", board, player1, player2) == :invalid
+      assert Input.validate("2", board, playerX, playerO) == :invalid
     end
 
     test "when the input is outside the range of the board" do
-      board = ["1", "X", "3",
-               "4", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Input.validate("10", board, player1, player2) == :invalid
+      assert Input.validate("10", board, playerX, playerO) == :invalid
     end
 
   end

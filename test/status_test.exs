@@ -6,8 +6,8 @@ defmodule StatusTest do
       [board: ["1", "2", "3",
                "4", "5", "6",
                "7", "8", "9"],
-      player1: %Player{name: "player1", symbol: "X"},
-      player2: %Player{name: "player2", symbol: "O"}]
+      playerX: %Player{name: "playerX", symbol: "X"},
+      playerO: %Player{name: "playerO", symbol: "O"}]
     end
 
     test "the game has no winner", context do
@@ -15,100 +15,108 @@ defmodule StatusTest do
     end
 
     test "the game has no tie", context do
-      assert Status.tie?(context[:board], context[:player1], context[:player2]) == false
+      assert Status.tie?(context[:board], context[:playerX], context[:playerO]) == false
     end
 
   end
 
   describe "during game" do
     test "a game with no three adjacent moves from a player has no winner" do
-      board = ["X", "2", "X",
-               "O", "5", "6",
-               "O", "8", "9"]
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [ playerX , "2", playerX,
+                playerO, "5", "6",
+                playerO, "8", "9"]
       assert Status.win?(board) == false
     end
 
     test "after one move has been made, the game is not tied" do
-      board = ["X", "2", "3",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, "2", "3",
                "4", "5", "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.tie?(board, player1, player2) == false
+      assert Status.tie?(board, playerX, playerO) == false
     end
 
     test "if there are any unplayed moves and no winner, the game is not tied" do
-      board = ["X", "O", "X",
-               "O", "X", "6",
-               "O", "X", "O"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.tie?(board, player1, player2) == false
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, playerX,
+               playerO, playerX, "6",
+               playerO, playerX, playerO]
+      assert Status.tie?(board, playerX, playerO) == false
     end
 
     test "if there are any unplayed moves and no winner, game is still in play" do
-      board = ["X", "O", "X",
-               "O", "X", "6",
-               "O", "X", "O"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.result(board, player2, player1) == {:play, player2, player1, ["X", "O", "X",
-                                                                                  "O", "X", "6",
-                                                                                  "O", "X", "O"]}
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, playerX,
+               playerO, playerX, "6",
+               playerO, playerX, playerO]
+      assert Status.result(board, playerO, playerX) == {:play, playerO, playerX, [playerX, playerO, playerX,
+                                                                                  playerO, playerX, "6",
+                                                                                  playerO, playerX, playerO]}
     end
   end
 
   describe "end of game" do
     test "a game with three adjacent moves in a row from a player has a winner" do
-      board = ["X", "X", "X",
-               "O", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerX, playerX,
+               playerO, playerO, "6",
                "7", "8", "9"]
       assert Status.win?(board) == true
     end
 
     test "a game with three adjacent moves in a column from a player has a winner" do
-      board = ["X", "O", "3",
-               "X", "O", "6",
-               "X", "8", "9"]
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, "3",
+               playerX, playerO, "6",
+               playerX, "8", "9"]
       assert Status.win?(board) == true
     end
 
     test "a game with three adjacent moves in a diagonal from a player has a winner" do
-      board = ["O", "X", "3",
-               "X", "O", "6",
-               "X", "8", "O"]
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerO, playerX, "3",
+               playerX, playerO, "6",
+               playerX, "8", playerO]
       assert Status.win?(board) == true
     end
 
     test "if all moves are played and there is no winner, the game is tied" do
-      board = ["X", "O", "X",
-               "O", "X", "X",
-               "O", "X", "O"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.tie?(board, player1, player2) == true
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, playerX,
+               playerO, playerX, playerX,
+               playerO, playerX, playerO]
+      assert Status.tie?(board, playerX, playerO) == true
     end
 
     test "there is a winner" do
-      board = ["X", "X", "X",
-               "O", "O", "6",
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerX, playerX,
+               playerO, playerO, "6",
                "7", "8", "9"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.result(board, player2, player1) == {:win, player1, ["X", "X", "X",
-                                                                        "O", "O", "6",
+      assert Status.result(board, playerO, playerX) == {:win, playerX, [playerX, playerX, playerX,
+                                                                        playerO, playerO, "6",
                                                                         "7", "8", "9"]}
     end
 
     test "there is a tie" do
-      board = ["X", "O", "X",
-               "O", "X", "X",
-               "O", "X", "O"]
-      player1 = %Player{name: "player1", symbol: "X"}
-      player2 = %Player{name: "player2", symbol: "O"}
-      assert Status.result(board, player2, player1) == {:tie, "IT'S A TIE!", ["X", "O", "X",
-                                                                            "O", "X", "X",
-                                                                            "O", "X", "O"]}
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, playerX,
+               playerO, playerX, playerX,
+               playerO, playerX, playerO]
+      assert Status.result(board, playerO, playerX) == {:tie, "IT'S A TIE!", [playerX, playerO, playerX,
+                                                                            playerO, playerX, playerX,
+                                                                            playerO, playerX, playerO]}
     end
   end
 end
