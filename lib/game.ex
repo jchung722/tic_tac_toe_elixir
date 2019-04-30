@@ -19,7 +19,7 @@ defmodule Game do
 
     case Input.validate(input, board, current_player, next_player) do
       :valid ->
-        new_board = Input.to_board_index(input) |> Board.update(board, current_player.symbol)
+        new_board = Input.to_board_index(input) |> Board.update(board, current_player)
         play(Status.result(new_board, next_player, current_player))
 
       :invalid ->

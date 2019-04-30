@@ -4,7 +4,7 @@ defmodule Status do
 
   def tie?([head | tail], player1, player2) do
     cond do
-      head == player1.symbol || head == player2.symbol ->
+      head == player1 || head == player2 ->
         tie?(tail, player1, player2)
       true ->
         false
