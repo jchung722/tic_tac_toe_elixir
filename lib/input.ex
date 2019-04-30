@@ -34,7 +34,7 @@ defmodule Input do
     move_board_index = Input.to_board_index(move)
     spot = Enum.at(board, move_board_index)
     cond do
-      spot == player1.symbol || spot == player2.symbol ->
+      spot == player1 || spot == player2 ->
         :invalid
       true ->
         :valid
