@@ -24,7 +24,7 @@ defmodule BoardTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Board.format(board) == " 1 | X | 3 \n---+---+---\n 4 | O | 6 \n---+---+---\n 7 | 8 | 9 "
+      assert Board.format(board) == " 1 | \e[32mX\e[0m | 3 \n---+---+---\n 4 | \e[32mO\e[0m | 6 \n---+---+---\n 7 | 8 | 9 "
     end
 
     test "when a player makes a move, the board will be updated with that move" do

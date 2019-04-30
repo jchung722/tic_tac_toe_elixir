@@ -19,7 +19,7 @@ defmodule Board do
   defp as_symbols([head | tail]) do
     cond do
       is_map(head) ->
-        [ head.symbol | as_symbols(tail)]
+        [ head.symbol |> green() | as_symbols(tail)]
       true ->
         [head | as_symbols(tail)]
     end
@@ -35,6 +35,10 @@ defmodule Board do
       true ->
         " #{a} | #{b} | #{c} \n---+---+---\n"  <> format(tail)
     end
+  end
+
+  defp green(text) do
+    IO.ANSI.green() <> text <> IO.ANSI.reset()
   end
 
 end

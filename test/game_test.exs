@@ -15,7 +15,7 @@ defmodule GameTest do
                Game.play(
                  Status.result(win_board, playerO, playerX)
                )
-             end) == "\e[2J\n X | O | 3 \n---+---+---\n X | O | 6 \n---+---+---\n X | 8 | 9 \nGAME OVER! playerX WINS!\n"
+             end) == "\e[2J\n \e[32mX\e[0m | \e[32mO\e[0m | 3 \n---+---+---\n \e[32mX\e[0m | \e[32mO\e[0m | 6 \n---+---+---\n \e[32mX\e[0m | 8 | 9 \nGAME OVER! playerX WINS!\n"
     end
 
     test "ends game and displays tie" do
@@ -28,7 +28,7 @@ defmodule GameTest do
                Game.play(
                  Status.result(full_board, playerO, playerX)
                )
-             end) == "\e[2J\n X | O | X \n---+---+---\n O | X | X \n---+---+---\n O | X | O \nGAME OVER! IT'S A TIE!\n"
+             end) == "\e[2J\n \e[32mX\e[0m | \e[32mO\e[0m | \e[32mX\e[0m \n---+---+---\n \e[32mO\e[0m | \e[32mX\e[0m | \e[32mX\e[0m \n---+---+---\n \e[32mO\e[0m | \e[32mX\e[0m | \e[32mO\e[0m \nGAME OVER! IT'S A TIE!\n"
     end
   end
 end
