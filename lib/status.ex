@@ -1,11 +1,15 @@
 defmodule Status do
-  def tie?([]), do: true
 
-  def tie?(["X" | tail]), do: tie?(tail)
+  def tie?([], _player1, _player2), do: true
 
-  def tie?(["O" | tail]), do: tie?(tail)
-
-  def tie?([_head | _tail]), do: false
+  def tie?([head | tail], player1, player2) do
+    cond do
+      head == player1.symbol || head == player2.symbol ->
+        tie?(tail, player1, player2)
+      true ->
+        false
+    end
+  end
 
 
   def win?(board), do: check_rows(board) ||  check_columns(board) || check_diagonals(board)
@@ -36,7 +40,7 @@ defmodule Status do
       win?(board) ->
         winner = current_player
         {:win, winner, board}
-      tie?(board) ->
+      tie?(board, next_player, current_player) ->
         {:tie, "IT'S A TIE!", board}
       true ->
         {:play, next_player, current_player, board}
