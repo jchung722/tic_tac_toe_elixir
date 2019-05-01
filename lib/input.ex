@@ -12,7 +12,7 @@ defmodule Input do
   def validate(move, board, player1, player2) do
     with {_integer, _binary} <- Integer.parse(move),
          :valid <- spot_check(move, board, player1, player2),
-         :valid <- boundary_check(move, board)
+         :valid <- range_check(move, board)
     do
       :valid
     else
@@ -41,11 +41,11 @@ defmodule Input do
     end
   end
 
-  defp boundary_check(move, board) do
+  defp range_check(move, board) do
     move_board_index = Input.to_board_index(move)
-    max_boundary = Enum.count(board)
+    max_range = Enum.count(board)
     cond do
-      move_board_index < max_boundary && move_board_index >= 0 ->
+      move_board_index < max_range && move_board_index >= 0 ->
         :valid
       true ->
         :invalid
