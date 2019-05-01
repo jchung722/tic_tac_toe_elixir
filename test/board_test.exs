@@ -27,13 +27,22 @@ defmodule BoardTest do
       assert Board.format(board) == " 1 | \e[32mX\e[0m | 3 \n---+---+---\n 4 | \e[32mO\e[0m | 6 \n---+---+---\n 7 | 8 | 9 "
     end
 
-    test "when a player makes a move, the board will be updated with that move" do
+    test "when a player makes a valid move, the board will be updated with that move" do
       playerX = %Player{name: "playerX", symbol: "X"}
       playerO = %Player{name: "playerO", symbol: "O"}
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Board.update(2, board, playerX) == [ "1", playerX, playerX, "4", playerO, "6", "7", "8", "9"]
+      assert Board.update("3", board, playerX) == {:ok, [ "1", playerX, playerX, "4", playerO, "6", "7", "8", "9"]}
+    end
+
+    test "when a player makes an invalid move, an error will be raised" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
+               "7", "8", "9"]
+      assert Board.update("2", board, playerX) == {:error, "Move is invalid"}
     end
 
   end

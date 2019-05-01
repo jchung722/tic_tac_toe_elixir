@@ -17,13 +17,12 @@ defmodule Game do
     Board.display(Board.format(board))
     input = Input.gets("Enter your move, #{current_player.name}:")
 
-    case Input.move_validator(input, board, current_player, next_player) do
-      :valid ->
-        new_board = Input.to_board_index(input) |> Board.update(board, current_player)
+    case Board.update(input, board, current_player) do
+      {:ok, new_board} ->
         play(Status.result(new_board, next_player, current_player))
 
-      :invalid ->
-        IO.puts("Input is invalid. Enter a valid move."); :timer.sleep(1000)
+      {:error, message} ->
+        IO.puts("#{message}. Enter a valid move."); :timer.sleep(1000)
         play(Status.result(board, current_player, next_player))
     end
 

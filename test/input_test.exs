@@ -10,7 +10,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.move_validator("1", board, playerX, playerO) == :valid
+      assert Input.move_validator("1", board) == :valid
     end
   end
 
@@ -25,7 +25,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.move_validator("\n", board, playerX, playerO) == :invalid
+      assert Input.move_validator("\n", board) == :invalid
     end
 
     test "when it is not numeric" do
@@ -34,7 +34,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.move_validator("invalid\n", board, playerX, playerO) == :invalid
+      assert Input.move_validator("invalid\n", board) == :invalid
     end
 
     test "the spot on the board is already taken" do
@@ -43,7 +43,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.move_validator("2", board, playerX, playerO) == :invalid
+      assert Input.move_validator("2", board) == :invalid
     end
 
     test "when the input is outside the range of the board" do
@@ -52,7 +52,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.move_validator("10", board, playerX, playerO) == :invalid
+      assert Input.move_validator("10", board) == :invalid
     end
   end
 end

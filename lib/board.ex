@@ -6,8 +6,16 @@ defmodule Board do
     arrange_string()
   end
 
-  def update(move_as_index, board, player) do
-    List.replace_at(board, move_as_index, player)
+  def update(move, board, player) do
+    case Input.move_validator(move, board) do
+      :valid ->
+        move_as_index = Input.to_board_index(move)
+        new_board = List.replace_at(board, move_as_index, player)
+        {:ok, new_board}
+
+      :invalid ->
+        {:error, "Move is invalid"}
+    end
   end
 
   def display(formatted_board) do
