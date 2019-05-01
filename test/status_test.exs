@@ -5,9 +5,7 @@ defmodule StatusTest do
     setup do
       [board: ["1", "2", "3",
                "4", "5", "6",
-               "7", "8", "9"],
-      playerX: %Player{name: "playerX", symbol: "X"},
-      playerO: %Player{name: "playerO", symbol: "O"}]
+               "7", "8", "9"]]
     end
 
     test "the game has no winner", context do
@@ -15,7 +13,7 @@ defmodule StatusTest do
     end
 
     test "the game has no tie", context do
-      assert Status.tie?(context[:board], context[:playerX], context[:playerO]) == false
+      assert Status.tie?(context[:board]) == false
     end
 
   end
@@ -32,11 +30,10 @@ defmodule StatusTest do
 
     test "after one move has been made, the game is not tied" do
       playerX = %Player{name: "playerX", symbol: "X"}
-      playerO = %Player{name: "playerO", symbol: "O"}
       board = [playerX, "2", "3",
                "4", "5", "6",
                "7", "8", "9"]
-      assert Status.tie?(board, playerX, playerO) == false
+      assert Status.tie?(board) == false
     end
 
     test "if there are any unplayed moves and no winner, the game is not tied" do
@@ -45,7 +42,7 @@ defmodule StatusTest do
       board = [playerX, playerO, playerX,
                playerO, playerX, "6",
                playerO, playerX, playerO]
-      assert Status.tie?(board, playerX, playerO) == false
+      assert Status.tie?(board) == false
     end
 
     test "if there are any unplayed moves and no winner, game is still in play" do
@@ -94,7 +91,7 @@ defmodule StatusTest do
       board = [playerX, playerO, playerX,
                playerO, playerX, playerX,
                playerO, playerX, playerO]
-      assert Status.tie?(board, playerX, playerO) == true
+      assert Status.tie?(board) == true
     end
 
     test "there is a winner" do

@@ -24,23 +24,13 @@ defmodule Input do
   defp spot_check(move, board) do
     move_board_index = Input.to_board_index(move)
     spot = Enum.at(board, move_board_index)
-    cond do
-      is_map(spot) ->
-        :invalid
-      true ->
-        :valid
-    end
+    if is_map(spot), do: :invalid, else: :valid
   end
 
   defp range_check(move, board) do
     move_board_index = Input.to_board_index(move)
     max_range = Enum.count(board)
-    cond do
-      move_board_index < max_range && move_board_index >= 0 ->
-        :valid
-      true ->
-        :invalid
-    end
+    if move_board_index < max_range && move_board_index >= 0, do: :valid, else: :invalid
   end
 
 end

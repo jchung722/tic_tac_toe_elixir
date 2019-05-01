@@ -9,12 +9,7 @@ defmodule Player do
 
   defp console_input_name(player) do
     player_name = Input.gets("#{player}, Enter your name:")
-    cond do
-      String.trim(player_name) == "" ->
-        player
-      true ->
-        player_name
-    end
+    if String.trim(player_name) == "", do: player, else: player_name
   end
 
   defp console_input_symbol(player) do
@@ -29,12 +24,7 @@ defmodule Player do
   end
 
   def symbol_validator(symbol) do
-    cond do
-      Regex.match?(~r/^[a-zA-Z0-9]$/, symbol) ->
-        :valid
-      true ->
-        :invalid
-    end
+    if Regex.match?(~r/^[a-zA-Z0-9]$/, symbol), do: :valid, else: :invalid
   end
 
 end

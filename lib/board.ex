@@ -24,26 +24,17 @@ defmodule Board do
 
   defp as_symbols([]), do: []
 
-  defp as_symbols([head | tail]) do
-    cond do
-      is_map(head) ->
-        [ head.symbol |> green() | as_symbols(tail)]
-      true ->
-        [head | as_symbols(tail)]
-    end
-  end
+  defp as_symbols([ %Player{symbol: symbol} | tail]), do: [ symbol |> green() | as_symbols(tail)]
+
+  defp as_symbols([ head | tail ]), do: [head | as_symbols(tail)]
+
 
   defp arrange_string([]), do: ""
 
-  defp arrange_string([ a, b, c | tail]) do
+  defp arrange_string([ a, b, c | tail]) when tail == [], do: " #{a} | #{b} | #{c} "
 
-    cond do
-      tail == [] ->
-        " #{a} | #{b} | #{c} "
-      true ->
-        " #{a} | #{b} | #{c} \n---+---+---\n"  <> format(tail)
-    end
-  end
+  defp arrange_string([ a, b, c | tail]), do: " #{a} | #{b} | #{c} \n---+---+---\n"  <> arrange_string(tail)
+
 
   defp green(text) do
     IO.ANSI.green() <> text <> IO.ANSI.reset()
