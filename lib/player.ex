@@ -23,7 +23,7 @@ defmodule Player do
       :valid ->
         symbol
       :invalid ->
-        IO.puts("Invalid symbol. Must be single alphanumeric character."); :timer.sleep(1000)
+        IO.puts("Invalid symbol. Must be single alphanumeric character.")
         console_input_symbol(player)
     end
   end
