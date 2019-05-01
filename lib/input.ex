@@ -9,7 +9,7 @@ defmodule Input do
     integer - 1
   end
 
-  def validate(move, board, player1, player2) do
+  def move_validator(move, board, player1, player2) do
     with {_integer, _binary} <- Integer.parse(move),
          :valid <- spot_check(move, board, player1, player2),
          :valid <- range_check(move, board)
@@ -18,15 +18,6 @@ defmodule Input do
     else
       :invalid -> :invalid
       :error -> :invalid
-    end
-  end
-
-  def validate(symbol) do
-    cond do
-      Regex.match?(~r/^[a-zA-Z0-9]$/, symbol) ->
-        :valid
-      true ->
-        :invalid
     end
   end
 

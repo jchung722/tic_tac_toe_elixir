@@ -10,9 +10,8 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.validate("1", board, playerX, playerO) == :valid
+      assert Input.move_validator("1", board, playerX, playerO) == :valid
     end
-
   end
 
   test "returns the board index from user input" do
@@ -26,7 +25,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.validate("\n", board, playerX, playerO) == :invalid
+      assert Input.move_validator("\n", board, playerX, playerO) == :invalid
     end
 
     test "when it is not numeric" do
@@ -35,7 +34,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.validate("invalid\n", board, playerX, playerO) == :invalid
+      assert Input.move_validator("invalid\n", board, playerX, playerO) == :invalid
     end
 
     test "the spot on the board is already taken" do
@@ -44,7 +43,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.validate("2", board, playerX, playerO) == :invalid
+      assert Input.move_validator("2", board, playerX, playerO) == :invalid
     end
 
     test "when the input is outside the range of the board" do
@@ -53,34 +52,7 @@ defmodule InputTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Input.validate("10", board, playerX, playerO) == :invalid
-    end
-
-  end
-
-  describe "player symbol is valid" do
-    test "when it is a single alphanumeric characters" do
-      player_symbol = "X"
-      assert Input.validate(player_symbol) == :valid
+      assert Input.move_validator("10", board, playerX, playerO) == :invalid
     end
   end
-
-  describe "player symbol is invalid" do
-
-    test "when it is empty" do
-      player_symbol = ""
-      assert Input.validate(player_symbol) == :invalid
-    end
-
-    test "when longer than one character" do
-      player_symbol = "OOO"
-      assert Input.validate(player_symbol) == :invalid
-    end
-
-    test "when not alphanumeric" do
-      player_symbol = "&"
-      assert Input.validate(player_symbol) == :invalid
-    end
-  end
-
 end

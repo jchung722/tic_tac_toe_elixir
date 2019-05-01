@@ -19,12 +19,21 @@ defmodule Player do
 
   defp console_input_symbol(player) do
     symbol = Input.gets("#{player}, Enter your symbol:")
-    case Input.validate(symbol) do
+    case symbol_validator(symbol) do
       :valid ->
         symbol
       :invalid ->
         IO.puts("Invalid symbol. Must be single alphanumeric character.")
         console_input_symbol(player)
+    end
+  end
+
+  def symbol_validator(symbol) do
+    cond do
+      Regex.match?(~r/^[a-zA-Z0-9]$/, symbol) ->
+        :valid
+      true ->
+        :invalid
     end
   end
 
