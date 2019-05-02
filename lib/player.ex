@@ -13,7 +13,7 @@ defmodule Player do
   end
 
   defp console_input_type(player) do
-    player_type = Input.gets("Enter #{player} type (computer/human):")
+    player_type = Input.gets("Enter #{player} type (computer/human): ")
     case type_validator(player_type) do
       :valid ->
         String.upcase(player_type)
@@ -24,12 +24,12 @@ defmodule Player do
   end
 
   defp console_input_name(player) do
-    player_name = Input.gets("#{player}, Enter your name:")
+    player_name = Input.gets("#{player}, Enter your name: ")
     if String.trim(player_name) == "", do: player, else: player_name
   end
 
   defp console_input_symbol(player) do
-    symbol = Input.gets("#{player}, Enter your symbol:")
+    symbol = Input.gets("#{player}, Enter your symbol: ")
     case symbol_validator(symbol) do
       :valid ->
         symbol
