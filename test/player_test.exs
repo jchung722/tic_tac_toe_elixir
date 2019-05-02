@@ -12,8 +12,13 @@ defmodule PlayerTest do
   end
 
   describe "player symbol is valid" do
-    test "when it is a single alphanumeric characters" do
+    test "when it is a single alphabetical character" do
       player_symbol = "X"
+      assert Player.symbol_validator(player_symbol) == :valid
+    end
+
+    test "when it is a single numeric character" do
+      player_symbol = "7"
       assert Player.symbol_validator(player_symbol) == :valid
     end
   end
