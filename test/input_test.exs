@@ -1,7 +1,7 @@
 defmodule InputTest do
   use ExUnit.Case
 
-  test "turns valid input into board index" do
+  test "turns integer input into board index" do
     assert Input.to_board_index("1") == 0
   end
 
