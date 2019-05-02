@@ -1,12 +1,25 @@
 defmodule Status do
 
-  def tie?([]), do: true
+  def result(board, next_player, current_player) do
+    cond do
+      win?(board) ->
+        winner = current_player
+        {:win, winner, board}
+      full?(board) ->
+        {:tie, "IT'S A TIE!", board}
+      true ->
+        {:play, next_player, current_player, board}
+    end
+  end
 
-  def tie?([ %Player{} | tail]), do: tie?(tail)
+  defp win?(board), do: check_rows(board) ||  check_columns(board) || check_diagonals(board)
 
-  def tie?([_head | _tail]), do: false
 
-  def win?(board), do: check_rows(board) ||  check_columns(board) || check_diagonals(board)
+  defp full?([]), do: true
+
+  defp full?([ %Player{} | tail]), do: full?(tail)
+
+  defp full?([_head | _tail]), do: false
 
 
   defp check_rows([]), do: false
@@ -29,15 +42,4 @@ defmodule Status do
 
   defp check_diagonals(_board), do: false
 
-  def result(board, next_player, current_player) do
-    cond do
-      win?(board) ->
-        winner = current_player
-        {:win, winner, board}
-      tie?(board) ->
-        {:tie, "IT'S A TIE!", board}
-      true ->
-        {:play, next_player, current_player, board}
-    end
-  end
 end
