@@ -11,6 +11,16 @@ defmodule PlayerTest do
     assert player.symbol == "X"
   end
 
+  test "a player can be human" do
+    player = %Player{type: "human"}
+    assert player.type == "human"
+  end
+
+  test "a player can be a computer" do
+    player = %Player{type: "computer"}
+    assert player.type == "computer"
+  end
+
   describe "player symbol is valid" do
     test "when it is a single alphabetical character" do
       player_symbol = "X"
@@ -39,6 +49,21 @@ defmodule PlayerTest do
       player_symbol = "&"
       assert Player.symbol_validator(player_symbol) == :invalid
     end
+  end
+
+  test "human player type is valid" do
+    player_type = "Human"
+    assert Player.type_validator(player_type) == :valid
+  end
+
+  test "computer player type is valid" do
+    player_type = "Computer"
+    assert Player.type_validator(player_type) == :valid
+  end
+
+  test "any player type that is neither human or computer is invalid" do
+    player_type = "something_else"
+    assert Player.type_validator(player_type) == :invalid
   end
 
 end
