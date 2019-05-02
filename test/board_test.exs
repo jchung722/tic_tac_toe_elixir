@@ -33,17 +33,27 @@ defmodule BoardTest do
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Board.update("3", board, playerX) == {:ok, [ "1", playerX, playerX, "4", playerO, "6", "7", "8", "9"]}
+      assert Board.update(2, board, playerX) == {:ok, [ "1", playerX, playerX, "4", playerO, "6", "7", "8", "9"]}
     end
 
-    test "when a player makes an invalid move, an error will be raised" do
+    test "when a player makes a move for a taken spot, an error will be raised" do
       playerX = %Player{name: "playerX", symbol: "X"}
       playerO = %Player{name: "playerO", symbol: "O"}
       board = ["1", playerX, "3",
                "4", playerO, "6",
                "7", "8", "9"]
-      assert Board.update("2", board, playerX) == {:error, "Move is invalid"}
+      assert Board.update(1, board, playerX) == {:error, "Move is invalid"}
+    end
+
+    test "when a player makes a move for a spot outside the board range, an error will be raised" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
+               "7", "8", "9"]
+      assert Board.update(9, board, playerX) == {:error, "Move is invalid"}
     end
 
   end
+
 end

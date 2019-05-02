@@ -6,20 +6,19 @@ defmodule Board do
     arrange_string()
   end
 
+  def display(formatted_board) do
+    IO.puts(formatted_board)
+  end
+
   def update(move, board, player) do
-    case Input.move_validator(move, board) do
+    case move_validator(move, board) do
       :valid ->
-        move_as_index = Input.to_board_index(move)
-        new_board = List.replace_at(board, move_as_index, player)
+        new_board = List.replace_at(board, move, player)
         {:ok, new_board}
 
       :invalid ->
         {:error, "Move is invalid"}
     end
-  end
-
-  def display(formatted_board) do
-    IO.puts(formatted_board)
   end
 
   defp as_symbols([]), do: []
@@ -38,6 +37,27 @@ defmodule Board do
 
   defp green(text) do
     IO.ANSI.green() <> text <> IO.ANSI.reset()
+  end
+
+  defp move_validator(move, board) do
+    with :valid <- range_check(move, board),
+         :valid <- spot_check(move, board)
+    do
+      :valid
+    else
+      :invalid -> :invalid
+      :error -> :invalid
+    end
+  end
+
+  defp spot_check(move, board) do
+    spot = Enum.at(board, move)
+    if is_map(spot), do: :invalid, else: :valid
+  end
+
+  defp range_check(move, board) do
+    max_range = Enum.count(board)
+    if move < max_range && move >= 0, do: :valid, else: :invalid
   end
 
 end
