@@ -14,6 +14,11 @@ defmodule BoardTest do
       board = %Board{}
       assert Board.format(board.spots) == " 1 | 2 | 3 \n---+---+---\n 4 | 5 | 6 \n---+---+---\n 7 | 8 | 9 "
     end
+
+    test "all spots are available" do
+      board_spots = %Board{}.spots
+      assert Board.available_spots(board_spots) == ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    end
   end
 
   describe "during a game" do
@@ -54,6 +59,24 @@ defmodule BoardTest do
       assert Board.update(9, board, playerX) == {:error, "Move is invalid"}
     end
 
+    test "spots not taken by players are available" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, "3",
+               "4", playerO, "6",
+               "7", "8", "9"]
+      assert Board.available_spots(board) == ["1", "3", "4", "6", "7", "8", "9"]
+    end
+
+  end
+
+  test "a full board has no available spots" do
+    playerX = %Player{name: "playerX", symbol: "X"}
+    playerO = %Player{name: "playerO", symbol: "O"}
+    board = [playerX, playerO, playerX,
+             playerO, playerX, playerX,
+             playerO, playerX, playerO]
+    assert Board.available_spots(board) == []
   end
 
 end

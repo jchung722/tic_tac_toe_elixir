@@ -21,6 +21,9 @@ defmodule Board do
     end
   end
 
+  def available_spots(board), do: Enum.filter(board, fn x -> !is_map(x) end)
+
+
   defp as_symbols([]), do: []
 
   defp as_symbols([ %Player{symbol: symbol} | tail]), do: [ symbol |> green() | as_symbols(tail)]

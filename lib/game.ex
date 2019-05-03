@@ -12,8 +12,8 @@ defmodule Game do
     IO.puts("GAME OVER! #{message}")
   end
 
-  def play({:play, current_player = %Player{type: "Computer"}, next_player, board}) do
-    move = Input.gets("Enter your move, #{current_player.name}:")
+  def play({:play, current_player = %Player{type: "COMPUTER"}, next_player, board}) do
+    move = Computer.random_move(board)
     {:ok, new_board} = Board.update(move, board, current_player)
     play(Status.result(new_board, next_player, current_player))
   end
