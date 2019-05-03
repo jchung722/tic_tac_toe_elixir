@@ -1,44 +1,14 @@
 defmodule Input do
-  def to_board_index(input) do
-    {integer, _} = Integer.parse(input)
-    integer - 1
+
+  def gets(prompt) do
+    IO.gets(prompt) |> String.trim()
   end
 
-  def validate(input, board) do
-    with {_integer, _binary} <- Integer.parse(input),
-         :valid <- spot_check(input, board),
-         :valid <- boundary_check(input, board)
-    do
-      :valid
-    else
-      :invalid -> :invalid
-      :error -> :invalid
+  def to_board_index(move) do
+    case Integer.parse(move) do
+      {integer, ""} -> integer - 1
+      _ -> -1
     end
   end
-
-  defp spot_check(input, board) do
-    input_board_index = Input.to_board_index(input)
-    spot = Enum.at(board, input_board_index)
-    case spot do
-      "X" ->
-        :invalid
-      "O" ->
-        :invalid
-      _ ->
-        :valid
-    end
-  end
-
-  defp boundary_check(input, board) do
-    input_board_index = Input.to_board_index(input)
-    max_boundary = Enum.count(board)
-    cond do
-      input_board_index < max_boundary && input_board_index >= 0 ->
-        :valid
-      true ->
-        :invalid
-    end
-  end
-
 
 end

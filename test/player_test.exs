@@ -1,19 +1,44 @@
 defmodule PlayerTest do
   use ExUnit.Case
 
-  test "a current player X will switch to player O" do
-    current_player = "X"
-    assert Player.switch(current_player) == "O"
+  test "a player can have a set name" do
+    player = %Player{name: "Player1"}
+    assert player.name == "Player1"
   end
 
-  test "a current player O will switch to player X" do
-    current_player = "O"
-    assert Player.switch(current_player) == "X"
+  test "a player can have a set symbol" do
+    player = %Player{symbol: "X"}
+    assert player.symbol == "X"
   end
 
-  test "if the player is not X or O, switching players will create an error" do
-    current_player = "A"
-    assert Player.switch(current_player) == {:error, "players can only be X or O"}
+  describe "player symbol is valid" do
+    test "when it is a single alphabetical character" do
+      player_symbol = "X"
+      assert Player.symbol_validator(player_symbol) == :valid
+    end
+
+    test "when it is a single numeric character" do
+      player_symbol = "7"
+      assert Player.symbol_validator(player_symbol) == :valid
+    end
+  end
+
+  describe "player symbol is invalid" do
+
+    test "when it is empty" do
+      player_symbol = ""
+      assert Player.symbol_validator(player_symbol) == :invalid
+    end
+
+    test "when longer than one character" do
+      player_symbol = "OOO"
+      assert Player.symbol_validator(player_symbol) == :invalid
+    end
+
+    test "when not alphanumeric" do
+      player_symbol = "&"
+      assert Player.symbol_validator(player_symbol) == :invalid
+    end
   end
 
 end
