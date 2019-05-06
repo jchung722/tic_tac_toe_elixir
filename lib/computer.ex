@@ -1,6 +1,7 @@
 defmodule Computer do
   def random_move(board) do
-    Board.available_spots(board) |>
-    Enum.random()
+    board
+    |> Board.available_spots
+    |> Enum.random
   end
 end

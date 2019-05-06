@@ -2,8 +2,9 @@ defmodule Board do
   defstruct spots: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
   def format(board) do
-    as_symbols(board) |>
-    arrange_string()
+    board
+    |> as_symbols
+    |> arrange_string
   end
 
   def display(formatted_board) do
