@@ -13,7 +13,7 @@ defmodule Game do
   end
 
   def play({:play, current_player = %Player{type: "COMPUTER"}, next_player, board}) do
-    move = Computer.random_move(board)
+    move = Computer.random_move(board) |> Input.to_board_index()
     {:ok, new_board} = Board.update(move, board, current_player)
     play(Status.result(new_board, next_player, current_player))
   end
