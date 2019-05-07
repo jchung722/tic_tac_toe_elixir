@@ -2,36 +2,21 @@ defmodule Player do
   defstruct symbol: "", name: "", type: ""
 
   def create("COMPUTER") do
-    player = computer_player()
     player_name = set_name()
     player_symbol = set_symbol()
-    %Player{ player | name: player_name, symbol: player_symbol}
+    %Player{name: player_name, symbol: player_symbol, type: "COMPUTER"}
   end
 
   def create("HUMAN") do
-    player = human_player()
     player_name = set_name()
     player_symbol = set_symbol()
-    %Player{ player | name: player_name, symbol: player_symbol}
+    %Player{name: player_name, symbol: player_symbol, type: "HUMAN"}
   end
 
   def create(_other) do
-    :error
-  end
-
-  def human_player(), do: %Player{type: "HUMAN"}
-
-  def computer_player(), do: %Player{type: "COMPUTER"}
-
-  def set_type() do
-    player_type = Input.gets("Enter player type (computer/human): ") |> String.upcase
-    case type_validator(player_type) do
-      :valid ->
-        player_type
-      :invalid ->
-        IO.puts("Invalid type. Must be either computer or human")
-        set_type()
-    end
+    IO.puts("Invalid type. Must be either computer or human")
+    type_input = Input.gets("Enter player type (computer/human): ") |> String.upcase
+    create(type_input)
   end
 
   defp set_name() do
@@ -53,14 +38,6 @@ defmodule Player do
       :invalid ->
         IO.puts("Invalid symbol. Must be single alphanumeric character.")
         set_symbol()
-    end
-  end
-
-  def type_validator(type) do
-    case type do
-      "COMPUTER" -> :valid
-      "HUMAN" -> :valid
-      _other -> :invalid
     end
   end
 
