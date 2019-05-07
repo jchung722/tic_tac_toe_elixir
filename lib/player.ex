@@ -2,22 +2,26 @@ defmodule Player do
   defstruct symbol: "", name: "", type: ""
 
   def create(player) do
-    player_type = console_input_type(player)
+    player = console_input_type(player)
     player_name =
-      case player_type do
-        "COMPUTER" -> player_type
+      case player.type do
+        "COMPUTER" -> player.type
         "HUMAN" -> console_input_name(player)
       end
     player_symbol = console_input_symbol(player_name)
-    %Player{name: player_name, symbol: player_symbol, type: player_type}
+    %Player{name: player_name, symbol: player_symbol}
   end
 
+  def human_player(), do: %Player{type: "HUMAN"}
+
+  def computer_player(), do: %Player{type: "COMPUTER"}
+
   defp console_input_type(player) do
-    player_type = Input.gets("Enter #{player} type (computer/human): ")
-    case type_validator(player_type) do
-      :valid ->
-        String.upcase(player_type)
-      :invalid ->
+    player_type = Input.gets("Enter #{player} type (computer/human): ") |> String.upcase
+    case player_type do
+      "COMPUTER" -> human_player()
+      "HUMAN"-> computer_player()
+      _ ->
         IO.puts("Invalid type. Must be either computer or human")
         console_input_type(player)
     end
@@ -41,15 +45,6 @@ defmodule Player do
 
   def symbol_validator(symbol) do
     if Regex.match?(~r/^[a-zA-Z0-9]$/, symbol), do: :valid, else: :invalid
-  end
-
-  def type_validator(type) do
-    type = String.upcase(type)
-    case type do
-      "COMPUTER" -> :valid
-      "HUMAN" -> :valid
-      _ -> :invalid
-    end
   end
 
 end
