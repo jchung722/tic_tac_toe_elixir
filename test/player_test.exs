@@ -19,6 +19,31 @@ defmodule PlayerTest do
     assert Player.computer_player() == %Player{type: "COMPUTER"}
   end
 
+  test "a computer player type input is valid" do
+    type_input = "COMPUTER"
+    assert Player.type_validator(type_input) == :valid
+  end
+
+  test "a human player type input is valid" do
+    type_input = "HUMAN"
+    assert Player.type_validator(type_input) == :valid
+  end
+
+  test "a player type input that is not a computer or human is invalid" do
+    type_input = "WIZARD"
+    assert Player.type_validator(type_input) == :invalid
+  end
+
+  test "a player name cannot be empty" do
+    name_input = ""
+    assert Player.name_validator(name_input) == :invalid
+  end
+
+  test "any non empty player name is valid" do
+    name_input = "Jane"
+    assert Player.name_validator(name_input) == :valid
+  end
+
   describe "player symbol is valid" do
     test "when it is a single alphabetical character" do
       player_symbol = "X"
