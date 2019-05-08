@@ -10,6 +10,7 @@ defmodule TicTacToeElixir.MixProject do
       escript: [main_module: TicTacToeElixir],
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      package: package(),
       source_url: "https://github.com/jchung722/tic_tac_toe_elixir",
       homepage_url: "https://github.com/jchung722/tic_tac_toe_elixir"
     ]
