@@ -2,15 +2,11 @@ defmodule Player do
   defstruct symbol: "", name: "", type: ""
 
   def create("COMPUTER") do
-    player_name = set_name()
-    player_symbol = set_symbol()
-    %Player{name: player_name, symbol: player_symbol, type: "COMPUTER"}
+    %Player{type: "COMPUTER"}
   end
 
   def create("HUMAN") do
-    player_name = set_name()
-    player_symbol = set_symbol()
-    %Player{name: player_name, symbol: player_symbol, type: "HUMAN"}
+    %Player{type: "HUMAN"}
   end
 
   def create(_other) do
@@ -19,25 +15,25 @@ defmodule Player do
     create(type_input)
   end
 
-  defp set_name() do
+  def set_name(player) do
     player_name = Input.gets("Enter player name: ")
     case name_validator(player_name) do
       :valid ->
-        player_name
+        %{player | name: player_name}
       :invalid ->
         IO.puts("Name cannot be empty.")
-        set_name()
+        set_name(player)
     end
   end
 
-  defp set_symbol() do
+  def set_symbol(player) do
     symbol = Input.gets("Enter player symbol: ")
     case symbol_validator(symbol) do
       :valid ->
-        symbol
+        %{player | symbol: symbol}
       :invalid ->
         IO.puts("Invalid symbol. Must be single alphanumeric character.")
-        set_symbol()
+        set_symbol(player)
     end
   end
 
