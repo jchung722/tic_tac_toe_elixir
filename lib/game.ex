@@ -12,6 +12,14 @@ defmodule Game do
     IO.puts("GAME OVER! #{message}")
   end
 
+  def play({:play, current_player = %Player{type: "COMPUTER"}, next_player, board}) do
+    move = board
+           |>Computer.random_move(board)
+           |> Input.to_board_index()
+    {:ok, new_board} = Board.update(move, board, current_player)
+    play(Status.result(new_board, next_player, current_player))
+  end
+
   def play({:play, current_player, next_player, board}) do
     clear_display()
     Board.display(Board.format(board))

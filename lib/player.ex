@@ -1,26 +1,44 @@
 defmodule Player do
-  defstruct symbol: "", name: ""
+  defstruct symbol: "", name: "", type: ""
 
-  def create(player) do
-    player_name = console_input_name(player)
-    player_symbol = console_input_symbol(player)
-    %Player{name: player_name, symbol: player_symbol}
+  def create("COMPUTER") do
+    %Player{type: "COMPUTER"}
   end
 
-  defp console_input_name(player) do
-    player_name = Input.gets("#{player}, Enter your name:")
-    if String.trim(player_name) == "", do: player, else: player_name
+  def create("HUMAN") do
+    %Player{type: "HUMAN"}
   end
 
-  defp console_input_symbol(player) do
-    symbol = Input.gets("#{player}, Enter your symbol:")
+  def create(_other) do
+    IO.puts("Invalid type. Must be either computer or human")
+    type_input = Input.gets("Enter player type (computer/human): ") |> String.upcase
+    create(type_input)
+  end
+
+  def set_name(player) do
+    player_name = Input.gets("Enter player name: ")
+    case name_validator(player_name) do
+      :valid ->
+        %{player | name: player_name}
+      :invalid ->
+        IO.puts("Name cannot be empty.")
+        set_name(player)
+    end
+  end
+
+  def set_symbol(player) do
+    symbol = Input.gets("Enter player symbol: ")
     case symbol_validator(symbol) do
       :valid ->
-        symbol
+        %{player | symbol: symbol}
       :invalid ->
         IO.puts("Invalid symbol. Must be single alphanumeric character.")
-        console_input_symbol(player)
+        set_symbol(player)
     end
+  end
+
+  def name_validator(name) do
+    if String.trim(name) == "", do: :invalid, else: :valid
   end
 
   def symbol_validator(symbol) do

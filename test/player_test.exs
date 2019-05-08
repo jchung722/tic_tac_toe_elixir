@@ -11,6 +11,26 @@ defmodule PlayerTest do
     assert player.symbol == "X"
   end
 
+  test "a computer player can be created" do
+    type_input = "COMPUTER"
+    assert Player.create(type_input) == %Player{type: "COMPUTER"}
+  end
+
+  test "a human player can be created" do
+    type_input = "HUMAN"
+    assert Player.create(type_input) == %Player{type: "HUMAN"}
+  end
+
+  test "a player name cannot be empty" do
+    name_input = ""
+    assert Player.name_validator(name_input) == :invalid
+  end
+
+  test "any non empty player name is valid" do
+    name_input = "Jane"
+    assert Player.name_validator(name_input) == :valid
+  end
+
   describe "player symbol is valid" do
     test "when it is a single alphabetical character" do
       player_symbol = "X"
