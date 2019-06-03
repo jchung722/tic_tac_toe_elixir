@@ -1,8 +1,12 @@
 defmodule Player do
   defstruct symbol: "", name: "", type: "", level: ""
 
-  def create("COMPUTER") do
-    %Player{type: "COMPUTER"}
+  def create("COMPUTER_EASY") do
+    %Player{type: "COMPUTER", level: "EASY"}
+  end
+
+  def create("COMPUTER_HARD") do
+    %Player{type: "COMPUTER", level: "HARD"}
   end
 
   def create("HUMAN") do
@@ -11,7 +15,7 @@ defmodule Player do
 
   def create(_other) do
     IO.puts("Invalid type. Must be either computer or human")
-    type_input = Input.gets("Enter player type (computer/human): ") |> String.upcase
+    type_input = Input.get_player_type
     create(type_input)
   end
 

@@ -11,9 +11,14 @@ defmodule PlayerTest do
     assert player.symbol == "X"
   end
 
-  test "a computer player can be created" do
-    type_input = "COMPUTER"
-    assert Player.create(type_input) == %Player{type: "COMPUTER"}
+  test "an easy computer player can be created" do
+    type_input = "COMPUTER_EASY"
+    assert Player.create(type_input) == %Player{type: "COMPUTER", level: "EASY"}
+  end
+
+  test "a hard computer player can be created" do
+    type_input = "COMPUTER_HARD"
+    assert Player.create(type_input) == %Player{type: "COMPUTER", level: "HARD"}
   end
 
   test "a human player can be created" do
@@ -44,7 +49,6 @@ defmodule PlayerTest do
   end
 
   describe "player symbol is invalid" do
-
     test "when it is empty" do
       player_symbol = ""
       assert Player.symbol_validator(player_symbol) == :invalid

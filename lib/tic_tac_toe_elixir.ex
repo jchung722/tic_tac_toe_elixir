@@ -2,12 +2,12 @@ defmodule TicTacToeElixir do
   def main(_args) do
 
     board = %Board{}.spots
-    player1_type = Input.gets("Enter player type (computer/human): ") |> String.upcase
+    player1_type = Input.get_player_type
     player1 = player1_type
               |> Player.create
               |> Player.set_name
               |> Player.set_symbol
-    player2_type = Input.gets("Enter player type (computer/human): ") |> String.upcase
+    player2_type = Input.get_player_type
     player2 = player2_type
               |> Player.create
               |> Player.set_name
