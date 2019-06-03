@@ -12,9 +12,9 @@ defmodule Computer do
       {:ok, new_board} = Input.to_board_index(spot) |> Board.update(board, current_player)
       result = Status.result(new_board, next_player, current_player)
       case result do
-        {:win, %Player{type: "COMPUTER"}, _board} ->
+        {:win, %Player{type: "COMPUTER", level: "HARD"}, _board} ->
           %{move: spot, score: 10}
-        {:win, %Player{type: "HUMAN"}, _board} ->
+        {:win, _beatable_player, _board} ->
           %{move: spot, score: -10}
         {:tie, _message, _board} ->
           %{move: spot, score: 0}
@@ -25,9 +25,9 @@ defmodule Computer do
     end)
 
     case current_player do
-      %Player{type: "COMPUTER"} ->
+      %Player{type: "COMPUTER", level: "HARD"} ->
         maximizer(moves)
-      %Player{type: "HUMAN"} ->
+      _beatable_player ->
         minimizer(moves)
     end
 
