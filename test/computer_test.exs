@@ -33,6 +33,7 @@ defmodule ComputerTest do
   end
 
   describe "unbeatable computer" do
+
     test "will choose the last available spot" do
       playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
@@ -86,6 +87,5 @@ defmodule ComputerTest do
                "7", "8", "9"]
       assert Computer.minimax(board, playerX, playerO) == %{move: "7", score: 10}
     end
-
   end
 end

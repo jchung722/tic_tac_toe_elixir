@@ -9,7 +9,9 @@ defmodule Computer do
   def minimax(board, current_player, next_player) do
     available_spots = Board.available_spots(board)
     moves = Enum.map(available_spots, fn spot ->
-      {:ok, new_board} = Input.to_board_index(spot) |> Board.update(board, current_player)
+      {:ok, new_board} = spot
+                         |> Input.to_board_index
+                         |> Board.update(board, current_player)
       result = Status.result(new_board, next_player, current_player)
       case result do
         {:win, %Player{type: "COMPUTER", level: "HARD"}, _board} ->
