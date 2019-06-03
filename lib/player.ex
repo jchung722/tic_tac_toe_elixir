@@ -1,5 +1,5 @@
 defmodule Player do
-  defstruct symbol: "", name: "", type: ""
+  defstruct symbol: "", name: "", type: "", level: ""
 
   def create("COMPUTER") do
     %Player{type: "COMPUTER"}

@@ -51,7 +51,7 @@ defmodule ComputerTest do
       assert Computer.minimax(board, playerX, playerO) == %{move: "9", score: 10}
     end
 
-    test "with three choices will choose a move that wins the game" do
+    test "with three choices will choose first available move that wins the game" do
       playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
@@ -60,13 +60,13 @@ defmodule ComputerTest do
       assert Computer.minimax(board, playerX, playerO) == %{move: "7", score: 10}
     end
 
-    test "without move that wins the game, will make move that blocks other player from winning" do
+    test "without immediate winning move will make move that blocks opponent from winning" do
       playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
-      board = [playerO, playerX, playerO,
+      board = ["1", playerX, playerO,
                "4", playerO, playerX,
-               playerX, "8", "9"]
-      assert Computer.minimax(board, playerX, playerO) == %{move: "9", score: 0}
+               playerX, "8", playerO]
+      assert Computer.minimax(board, playerX, playerO) == %{move: "1", score: 0}
     end
 
     test "makes first move in best position, 1" do
