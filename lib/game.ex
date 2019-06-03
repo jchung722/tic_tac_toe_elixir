@@ -14,9 +14,9 @@ defmodule Game do
 
   def play({:play, current_player = %Player{type: "COMPUTER"}, next_player, board}) do
     move = board
-           |>Computer.random_move(board)
-           |> Input.to_board_index()
-    {:ok, new_board} = Board.update(move, board, current_player)
+           |> Computer.minimax(current_player, next_player)
+    move_index = Input.to_board_index(move.move)
+    {:ok, new_board} = Board.update(move_index, board, current_player)
     play(Status.result(new_board, next_player, current_player))
   end
 
