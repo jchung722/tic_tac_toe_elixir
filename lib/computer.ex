@@ -6,7 +6,12 @@ defmodule Computer do
     |> Enum.random
   end
 
-  def minimax(board, current_player, next_player) do
+  def best_move(board, current_player, next_player) do
+    tagged_current_player = %{current_player | turn: "CURRENT"}
+    minimax(board, tagged_current_player, next_player).move
+  end
+
+  defp minimax(board, current_player, next_player) do
     untagged_current_player = untag(current_player)
     available_spots = Board.available_spots(board)
 

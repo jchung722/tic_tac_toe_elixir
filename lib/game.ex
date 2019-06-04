@@ -14,16 +14,16 @@ defmodule Game do
 
   def play({:play, current_player = %Player{type: "COMPUTER", level: "EASY"}, next_player, board}) do
     move = board
-           |> Computer.random_move()
-           |> Input.to_board_index()
+           |> Computer.random_move
+           |> Input.to_board_index
     {:ok, new_board} = Board.update(move, board, current_player)
     play(Status.result(new_board, next_player, current_player))
   end
 
   def play({:play, current_player = %Player{type: "COMPUTER", level: "HARD"}, next_player, board}) do
-    tagged_current_player = %{current_player | turn: "CURRENT"}
-    move = Computer.minimax(board, tagged_current_player, next_player).move
-           |> Input.to_board_index()
+    move = board
+           |> Computer.best_move(current_player, next_player)
+           |> Input.to_board_index
     {:ok, new_board} = Board.update(move, board, current_player)
     play(Status.result(new_board, next_player, current_player))
   end

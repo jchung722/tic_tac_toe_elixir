@@ -35,63 +35,57 @@ defmodule ComputerTest do
   describe "unbeatable computer" do
 
     test "will choose the last available spot" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerX,
                playerO, playerO, "9"]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "9", score: 10}
+      assert Computer.best_move(board, playerX, playerO) == "9"
     end
 
     test "with two choices will choose immediate move that wins the game" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerO, playerX,
                playerO, "8", "9"]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "9", score: 10}
+      assert Computer.best_move(board, playerX, playerO) == "9"
     end
 
     test "with three choices will choose first available move that wins the game" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerO,
                "7", "8", "9"]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "7", score: 10}
+      assert Computer.best_move(board, playerX, playerO) == "7"
     end
 
     test "without immediate winning move will make move that blocks opponent from winning" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = ["1", playerX, playerO,
                "4", playerO, playerX,
                playerX, "8", playerO]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "1", score: 0}
+      assert Computer.best_move(board, playerX, playerO) == "1"
     end
 
     test "makes first move in best position, 1" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = ["1", "2", "3",
                "4", "5", "6",
                "7", "8", "9"]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "1", score: 0}
+      assert Computer.best_move(board, playerX, playerO) == "1"
     end
 
     test "with three choices will choose first available move that wins the game against easy computer" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
-      tagged_playerX = %{playerX | turn: "CURRENT"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
       playerO = %Player{name: "playerO", symbol: "O", type: "COMPUTER", level: "EASY"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerO,
                "7", "8", "9"]
-      assert Computer.minimax(board, tagged_playerX, playerO) == %{move: "7", score: 10}
+      assert Computer.best_move(board, playerX, playerO) == "7"
     end
   end
 end
