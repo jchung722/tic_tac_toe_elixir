@@ -21,7 +21,8 @@ defmodule Game do
   end
 
   def play({:play, current_player = %Player{type: "COMPUTER", level: "HARD"}, next_player, board}) do
-    move = Computer.minimax(board, current_player, next_player).move
+    tagged_current_player = %{current_player | turn: "CURRENT"}
+    move = Computer.minimax(board, tagged_current_player, next_player).move
            |> Input.to_board_index()
     {:ok, new_board} = Board.update(move, board, current_player)
     play(Status.result(new_board, next_player, current_player))

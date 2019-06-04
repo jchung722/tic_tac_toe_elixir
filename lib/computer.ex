@@ -7,16 +7,18 @@ defmodule Computer do
   end
 
   def minimax(board, current_player, next_player) do
+    untagged_current_player = untag(current_player)
     available_spots = Board.available_spots(board)
+
     moves = Enum.map(available_spots, fn spot ->
       {:ok, new_board} = spot
                          |> Input.to_board_index
-                         |> Board.update(board, current_player)
+                         |> Board.update(board, untagged_current_player)
       result = Status.result(new_board, next_player, current_player)
       case result do
-        {:win, %Player{type: "COMPUTER", level: "HARD"}, _board} ->
+        {:win, %Player{type: "COMPUTER", level: "HARD", turn: "CURRENT"}, _board} ->
           %{move: spot, score: 10}
-        {:win, _beatable_player, _board} ->
+        {:win, _opponent, _board} ->
           %{move: spot, score: -10}
         {:tie, _message, _board} ->
           %{move: spot, score: 0}
@@ -27,12 +29,16 @@ defmodule Computer do
     end)
 
     case current_player do
-      %Player{type: "COMPUTER", level: "HARD"} ->
+      %Player{type: "COMPUTER", level: "HARD", turn: "CURRENT"} ->
         maximizer(moves)
-      _beatable_player ->
+      _opponent ->
         minimizer(moves)
     end
 
+  end
+
+  defp untag(player) do
+    %{player | turn: ""}
   end
 
   defp maximizer(moves) do
