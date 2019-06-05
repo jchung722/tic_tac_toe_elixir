@@ -35,7 +35,7 @@ defmodule ComputerTest do
   describe "unbeatable computer" do
 
     test "will choose the last available spot" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerX,
@@ -44,7 +44,7 @@ defmodule ComputerTest do
     end
 
     test "with two choices will choose immediate move that wins the game" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerO, playerX,
@@ -53,7 +53,7 @@ defmodule ComputerTest do
     end
 
     test "with three choices will choose first available move that wins the game" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerO,
@@ -62,7 +62,7 @@ defmodule ComputerTest do
     end
 
     test "without immediate winning move will make move that blocks opponent from winning" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = ["1", playerX, playerO,
                "4", playerO, playerX,
@@ -71,7 +71,7 @@ defmodule ComputerTest do
     end
 
     test "makes first move in best position, 1" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "HUMAN"}
       board = ["1", "2", "3",
                "4", "5", "6",
@@ -80,8 +80,17 @@ defmodule ComputerTest do
     end
 
     test "with three choices will choose first available move that wins the game against easy computer" do
-      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER"}
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
       playerO = %Player{name: "playerO", symbol: "O", type: "COMPUTER", level: "EASY"}
+      board = [playerX, playerO, playerX,
+               playerO, playerX, playerO,
+               "7", "8", "9"]
+      assert Computer.best_move(board, playerX, playerO) == "7"
+    end
+
+    test "with three choices will choose first available move that wins the game against unbeatable computer" do
+      playerX = %Player{name: "playerX", symbol: "X", type: "COMPUTER", level: "HARD"}
+      playerO = %Player{name: "playerO", symbol: "O", type: "COMPUTER", level: "HARD"}
       board = [playerX, playerO, playerX,
                playerO, playerX, playerO,
                "7", "8", "9"]

@@ -39,7 +39,6 @@ defmodule Computer do
       _opponent ->
         minimizer(moves)
     end
-
   end
 
   defp untag(player) do

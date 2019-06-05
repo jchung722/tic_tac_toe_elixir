@@ -12,18 +12,15 @@ defmodule PlayerTest do
   end
 
   test "an easy computer player can be created" do
-    type_input = "COMPUTER_EASY"
-    assert Player.create(type_input) == %Player{type: "COMPUTER", level: "EASY"}
+    assert Player.create("COMPUTER_EASY") == %Player{type: "COMPUTER", level: "EASY"}
   end
 
   test "a hard computer player can be created" do
-    type_input = "COMPUTER_HARD"
-    assert Player.create(type_input) == %Player{type: "COMPUTER", level: "HARD"}
+    assert Player.create("COMPUTER_HARD") == %Player{type: "COMPUTER", level: "HARD"}
   end
 
   test "a human player can be created" do
-    type_input = "HUMAN"
-    assert Player.create(type_input) == %Player{type: "HUMAN"}
+    assert Player.create("HUMAN") == %Player{type: "HUMAN"}
   end
 
   test "a player name cannot be empty" do

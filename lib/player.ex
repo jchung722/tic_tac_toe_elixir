@@ -15,8 +15,8 @@ defmodule Player do
 
   def create(_other) do
     IO.puts("Invalid type. Must be either computer or human")
-    type_input = Input.get_player_type
-    create(type_input)
+    Input.get_player_type
+    |> create
   end
 
   def set_name(player) do
