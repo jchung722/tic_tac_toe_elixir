@@ -12,8 +12,15 @@ defmodule Input do
   end
 
   def get_player_type("COMPUTER") do
-    gets("Choose computer level (easy/hard): ")
-    |> (&String.upcase("COMPUTER_#{&1}")).()
+    level = gets("Choose computer level (easy/hard): ")
+            |> String.upcase
+
+    if level != "HARD" && level != "EASY" do
+      IO.puts("Invalid computer level.")
+      get_player_type("COMPUTER")
+    else
+      get_player_type("COMPUTER_#{level}")
+    end
   end
 
   def get_player_type(type) do
