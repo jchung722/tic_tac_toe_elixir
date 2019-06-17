@@ -15,6 +15,10 @@ defmodule StatusTest do
       assert Status.result(context[:board], context[:playerX], context[:playerO]) == {:play, context[:playerX], context[:playerO], context[:board]}
     end
 
+    test "returns zero indices of winning marks", context do
+      assert Status.winning_marks(context[:board]) ==  []
+    end
+
   end
 
   describe "during game" do
@@ -35,7 +39,16 @@ defmodule StatusTest do
                playerO, playerX, playerO]
       assert Status.result(board, playerO, playerX) == {:play, playerO, playerX, board}
     end
+
+    test "returns zero indices of winning marks of game" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = ["1", playerX, playerX,
+               playerO, playerO, "6",
+               "7", "8", "9"]
+      assert Status.winning_marks(board) == []
   end
+end
 
   describe "end of game" do
     test "a game with three adjacent moves in a row from a player has a winner" do
@@ -83,5 +96,33 @@ defmodule StatusTest do
       assert Status.result(board, playerO, playerX) == {:win, playerX, board}
     end
 
+    test "returns indices of winning marks in a row" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerX, playerX,
+               playerO, playerO, "6",
+               "7", "8", "9"]
+
+      assert Status.winning_marks(board) == [0, 1 ,2]
+
+    end
+
+    test "returns indices of winning marks in a column" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerX, playerO, "3",
+               playerX, playerO, "6",
+               playerX, "8", "9"]
+      assert Status.winning_marks(board) == [0, 3, 6]
+    end
+
+    test "returns indices of winning marks in a diagonal" do
+      playerX = %Player{name: "playerX", symbol: "X"}
+      playerO = %Player{name: "playerO", symbol: "O"}
+      board = [playerO, playerX, "3",
+               playerX, playerO, "6",
+               playerX, "8", playerO]
+      assert Status.winning_marks(board) == [0, 4, 8]
+    end
   end
 end
