@@ -20,7 +20,6 @@ defmodule Status do
       check_diagonals(board) -> get_winners_in_diagonal(board, index_list)
       true -> []
     end
-
   end
 
   defp win?(board), do: check_rows(board) ||  check_columns(board) || check_diagonals(board)
@@ -82,6 +81,6 @@ defmodule Status do
     [index1, index2, index3]
   end
 
-defp get_winners_in_diagonal(_board), do: []
+  defp get_winners_in_diagonal(_board, _index_list), do: []
 
 end
