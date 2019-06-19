@@ -4,7 +4,7 @@ defmodule TicTacToeElixir.MixProject do
   def project do
     [
       app: :tic_tac_toe_elixir,
-      version: "1.1.0",
+      version: "1.2.0",
       description: "Logic for a game of TicTacToe",
       elixir: "~> 1.8",
       escript: [main_module: TicTacToeElixir],
